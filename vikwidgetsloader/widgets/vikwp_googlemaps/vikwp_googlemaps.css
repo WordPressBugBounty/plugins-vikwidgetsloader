@@ -1,0 +1,139 @@
+/* VikWP Google Maps */
+
+.vikgooglemapscontainer {
+    position: relative;
+}
+.vikgm_cnt_container {
+    background: #222;
+    color: #fff;
+}
+.vikcnt_left .vikgm_cnt_container {
+    position: absolute;
+    top: 0;
+    left:0;
+    height: 100%;
+    width: 30%;
+    z-index: 100;
+}
+.vikcnt_above .vikgm_cnt_inner {
+    display: inline-block;
+    width: 100%;
+    padding: 20px 40px 30px;
+}
+.vikcnt_above .vikgm_cnt_det {
+    float: left;
+    display: inline-block;
+    margin: 0 30px 0 0;
+}
+.vikcnt_above div.vikgm_cnt_det:first-child {
+    margin-left:0;
+}
+.vikcnt_right .vikgm_cnt_container {
+    position: absolute;
+    top: 0;
+    right:0;
+    height: 100%;
+    width: 30%;
+    z-index: 100;
+}
+.vikcnt_right .vikgooglemaps_content {
+    width: 70%;
+}
+.vikcnt_hover .vikgm_cnt_container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  z-index: 100;
+}
+.vikcnt_hover .vikgm_cnt_item.vikgm_cnt_title > h3 {
+  margin-top: 0;
+}
+.vikcnt_hover .vikgooglemaps_content {
+    width: 100%;
+}
+.vikgm_cnt_item.vikgm_cnt_title > h3 {
+    font-weight: 400;
+}
+.vikgm_cnt_inner {
+    padding: 20px 40px;
+}
+.vikgm_cnt_textone, .vikgm_cnt_texttwo {
+    color: #bbb;
+    font-size: 14px;
+    width: 100%;
+    display: inline-block;
+}
+.vikgm_cnt_textone {
+    margin: 0 0 15px;
+}
+.vikgm_cnt_det {
+    margin: 10px 0;
+}
+.vikgm_cnt_det span {
+    display: inline-block;
+    margin: 0 0 0 10px;
+}
+@font-face {
+      font-family: 'fontello';
+      src: url('font/fontello.eot?81232221');
+      src: url('font/fontello.eot?81232221#iefix') format('embedded-opentype'),
+           url('font/fontello.woff?81232221') format('woff'),
+           url('font/fontello.ttf?81232221') format('truetype'),
+           url('font/fontello.svg?81232221#fontello') format('svg');
+      font-weight: normal;
+      font-style: normal;
+}
+.vik-icons  {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* You can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+
+/*** Responsive ***/
+@media screen and (max-width: 990px) { 
+  .vikcnt_left .vikgm_cnt_container, .vikcnt_right .vikgm_cnt_container {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 715px) {
+  .vikcnt_left .vikgm_cnt_container, .vikcnt_right .vikgm_cnt_container {
+    width: 100%;
+    position: relative;
+    top: 0 !important;
+    left: 0 !important;
+    transform: translate(0, 0) !important;
+    height: auto !important;
+  }
+}

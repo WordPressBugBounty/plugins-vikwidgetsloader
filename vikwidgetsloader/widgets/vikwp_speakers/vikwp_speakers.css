@@ -1,0 +1,153 @@
+/* VikWP Speakers */
+
+.viksp_container {
+    display: inline-block;
+    width: 100%;
+}
+.viksp-speaker {
+    float: left;
+    display: inline-block;
+    padding: 0 15px;
+    position: relative;
+    margin: 5px 0;
+    max-width: 50%;
+}
+.viksp-divimg {
+    background: #030c17; 
+}
+.viksp-imgmask:before {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    bottom: 20px;
+    left: 20px;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 30px rgba(255,255,255,0.3);
+    content: '';
+    opacity: 0;
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: scale3d(1.4,1.4,1);
+    transform: scale3d(1.4,1.4,1);
+}
+
+.viksp-speaker img {
+    opacity: 0.9;
+    -webkit-transition: opacity 0.35s;
+    transition: opacity 0.35s;
+}
+.viksp-speaker:hover .viksp-imgmask::before {
+    opacity: 1;
+    -webkit-transform: scale3d(1,1,1);
+    transform: scale3d(1,1,1);
+}
+
+.viksp-speaker:hover .viksp-divimg {
+    background-color: rgba(58,52,42,0);
+}
+
+.viksp-speaker:hover img {
+    opacity: 0.8;
+}
+.viksp-divimg {
+    position: relative;
+}
+.viksp-imgmask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:100%;
+    text-align: center;
+    opacity: 0;
+    background: rgba(0,0,0,0.2);
+    transition: all 400ms ease-in-out 0s;
+    -moz-transition: all 400ms ease-in-out 0s;
+    -webkit-transition: all 400ms ease-in-out 0s;
+    -o-transition: all 400ms ease-in-out 0s;
+    padding: 2em;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.viksp-divimg:hover .viksp-imgmask {
+    opacity: 1;
+    transition: all 400ms ease-in-out 0s;
+    -moz-transition: all 400ms ease-in-out 0s;
+    -webkit-transition: all 400ms ease-in-out 0s;
+    -o-transition: all 400ms ease-in-out 0s;
+}
+.viksp-imgmasktwo {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.2);
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    opacity: 0;
+    transition: all 400ms ease-in-out 0s;
+    -moz-transition: all 400ms ease-in-out 0s;
+    -webkit-transition: all 400ms ease-in-out 0s;
+    -o-transition: all 400ms ease-in-out 0s;
+}
+.viksp-divimg:hover .viksp-imgmasktwo {
+    transition: all 400ms ease-in-out 0s;
+    -moz-transition: all 400ms ease-in-out 0s;
+    -webkit-transition: all 400ms ease-in-out 0s;
+    -o-transition: all 400ms ease-in-out 0s;
+    opacity: 1;
+}
+.viksp-img {
+    width: 100%;
+}
+.viksp-speaker:last-child .viksp-inner {
+    padding-right:0;
+}
+.viksp-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px 0 5px 0;
+    color: #444;
+}
+.viksp-job {
+    font-size: 14px;
+    font-weight: 400;
+    margin: -5px 0 6px 0;
+    color: #777;
+    text-transform: uppercase;
+}
+.viksp-descr {
+    font-size: 14px;
+    color: #777;
+    margin: 0 0 10px;
+}
+.viksp-socials-link {
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+.viksp-socials-link > a {
+    background: #fff;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 3px;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    line-height: 27px;
+}
+.viksp_text {
+    margin: 0 0 25px;
+    font-size: 15px;
+    color: #999;
+}
+
+/*** Responsive ***/
+@media screen and (max-width: 860px) { 
+    .viksp-speaker {
+        width: 50% !important;
+    }
+}
+@media screen and (max-width: 600px) { 
+    .viksp-speaker {
+        width: 100% !important;
+    }
+}

@@ -1,0 +1,142 @@
+/** VikWP Icons **/
+/*.vikic-topdesc {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.vikic-item {
+    text-align: center;
+}
+.vikic-item-inner {
+}
+.vikic-item a {
+    display: inline-block;
+}
+.vikic-item.vikic-circle i {
+	background: #fff;
+    text-align: center;
+    border-radius: 50%;
+    border: 2px solid #e7e7e7;
+}
+.vikic-small.vikic-circle i {
+    width: 38px;
+    height: 38px;
+    line-height: 35px;
+}
+.vikic-small i {
+    font-size: 22px;
+}
+.vikic-medium.vikic-circle i {
+    width: 62px;
+    height: 62px;
+    line-height: 62px;
+}
+.vikic-medium i {
+    font-size: 24px;
+}
+.vikic-big.vikic-circle i {
+    width: 82px;
+    height: 82px;
+    line-height: 82px;
+}
+.vikic-big i {
+    font-size: 28px;
+}
+.vikic-item h3 {
+    font-size: 24px;
+}
+.vikic-item.col-md-1 {
+    float: none;
+    display: inline-block;
+    padding: 0 5px;
+    width: auto;
+    max-width: inherit;
+    flex: 0;
+}
+.vikic-align-center {
+    justify-content: center;
+}
+@media screen and (max-width : 780px) {
+    .vikic-inner .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}*/
+
+.vikicons-container .container-fluid, .vikicons-container.container-fluid {
+    padding: 0;
+}
+.vikicons-topdesc {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.vikicons-item {
+    text-align: center;
+}
+.vikicons-item-inner {
+}
+.vikicons-item a {
+    display: inline-block;
+}
+.vikicons-item.vikicons-circle .vikicons-item-icoelem {
+    display: inline-block;
+    border-radius: 50%;
+    padding: 15px;
+    background: #fff;
+    border: 2px solid #ddd;
+    color: #666;
+    text-align: center;
+    line-height: 1;
+    box-sizing: content-box;
+    white-space: nowrap;
+}
+.vikicons-item.vikicons-circle .vikicons-item-icoelem > i, .vikicons-item.vikicons-circle .vikicons-item-icoelem > a {
+    display: inline-block;
+    vertical-align: middle;
+}
+.vikicons-item h3 {
+    font-size: 24px;
+}
+.vikicons-item.col-md-1 {
+    float: none;
+    display: inline-block;
+    padding: 0 5px;
+    width: auto;
+    max-width: inherit;
+    flex: 0;
+}
+.vikicons-align-center {
+    justify-content: center;
+}
+.vikicons-item-left, .vikicons-item-right {
+    display: flex;
+    text-align: left;
+}
+.vikicons-item-left h3, .vikicons-item-right h3 {
+    margin: 0;
+}
+.vikicons-item-left .vikicons-item-icon {
+    margin-right: 20px;
+}
+.vikicons-item-right .vikicons-item-icon {
+    margin-left: 20px;
+    order: 2;
+}
+.vikicons-item-bottom {
+    display: flex;
+    flex-wrap: wrap;
+}
+.vikicons-item-bottom > div {
+    flex: 100%;
+}
+.vikicons-item-bottom .vikicons-item-icon {
+    order: 2;
+}
+.vikicons-item-inner {
+    margin: 10px 0;
+}
+@media screen and (max-width : 780px) {
+    .vikicons-inner .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}

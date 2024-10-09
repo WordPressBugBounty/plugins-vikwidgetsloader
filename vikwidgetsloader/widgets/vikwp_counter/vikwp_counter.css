@@ -1,0 +1,28 @@
+/*** VikWP Counter ***/
+
+.vikcounter .vikcounter-inner {
+  display: inline-block;
+  width: 100%;
+}
+.vikcounter-item {
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+}
+.vikcounter-item-inner {
+  background-color:rgba(0,0,0,0.4);
+  border:1px solid #666;
+  padding: 30px;
+}
+
+.vikcounter-count {
+  display: block;
+  font-size: 1.8em;
+  margin: 10px 0 15px;
+  font-weight: bold;
+}
+.vikcounter-title {
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-top: 5px;
+}

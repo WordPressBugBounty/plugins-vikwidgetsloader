@@ -1,0 +1,94 @@
+/* VikWP Cookies Policy */
+
+.vikcp-policy-container {
+  display: none;
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.vikcp-policy-inner {
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  z-index: 9999999;
+}
+
+.vikcp-policy-display-bottom {
+  bottom: 0;
+  left: 0;
+  height: 10%;
+  padding: 20px;
+}
+
+.vikcp-policy-display-top {
+  top: 0;
+  left: 0;
+  height: 10%;
+  padding: 20px;
+}
+.vikcp-policy-display-bottom .vikcp-policy-link, .vikcp-policy-display-top .vikcp-policy-link {
+  margin: 0 8px 0 4px;
+}
+.vikcp-policy-display-middle .vikcp-policy-link {
+  display: block;
+}
+.vikcp-policy-link a {
+  font-weight: bold;
+  color: #eee;
+}
+.vikcp-policy-display-middle {
+  top: 35%;
+  left: 35%;
+  min-height: 15%;
+  width: 35%;
+  padding: 20px;
+}
+.vikcp-policy-display-middle #vikcp-policy-btn {
+  display: block;
+  text-align: center;
+  margin: 10px auto;
+}
+
+.vikcp-policy-inner button {
+  -moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #54a3f7;
+  box-shadow:inset 0px 1px 0px 0px #54a3f7;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #007dc1), color-stop(1, #0061a7));
+  background:-moz-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+  background:-webkit-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+  background:-o-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+  background:-ms-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+  background:linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#007dc1', endColorstr='#0061a7',GradientType=0);
+  background-color:#007dc1;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+  border:1px solid #124d77;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:13px;
+  padding:6px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #154682;
+}
+.vikcp-policy-inner button:hover {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0061a7), color-stop(1, #007dc1));
+  background:-moz-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+  background:-webkit-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+  background:-o-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+  background:-ms-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+  background:linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0061a7', endColorstr='#007dc1',GradientType=0);
+  background-color:#0061a7;
+}
+.vikcp-policy-inner button:active {
+  position:relative;
+  top:1px;
+}

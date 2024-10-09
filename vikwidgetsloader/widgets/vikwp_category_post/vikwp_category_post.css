@@ -1,0 +1,65 @@
+/*** Category Widget **/
+.vikwp_category-widget {
+	margin-top: 20px;
+}
+.vikwp_category-widget .vikwp_category-item {
+	list-style-type: none;
+	padding: 0 !important;
+}
+.vikwp_category-widget .vikwp_category-inner {
+    background: #fff;
+    border: 1px solid #f1f1f1;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px;
+}
+.vikwp_category-widget .vikwp_category-ul {
+	display: flex;
+	flex-wrap: wrap;
+}
+.vikwp_category-widget .vikwp_category-img {
+    margin-right: 0 !important;
+    position: relative;
+    padding-left: 0;
+}
+.vikwp_category-widget .vikwp_category-img:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10.5px 14px 10.5px 0;
+    border-color: transparent #fff transparent transparent;
+    right: 15px;
+    top: 45%;
+    transform: translate(0%, 45%);
+    position: absolute;
+}
+.vikwp_category-widget .vikwp_category-cnt {
+	padding: 15px 10px;
+	overflow: hidden;
+}
+.vikwp_category-widget .vikwp_category-title {
+	font-size: 1.1em;
+	font-weight: 400;
+	margin-bottom: 8px;
+	display: inline-block;
+}
+.vikwp_category-widget .vikwp_category-post-date {
+    text-align: left;
+    padding: 0 0 5px;
+    font-weight: bold;
+    font-size: .9em;
+    color: #999;
+}
+.vikwp_category-widget .vikwp_category-post-date i {
+    margin-right: 5px;
+}
+
+@media screen and (max-width: 768px) {
+    .vikwp_category-widget .vikwp_category-img {
+        padding-right: 0;
+    }
+    .vikwp_category-widget .vikwp_category-img::after {
+        display: none;
+    }
+}

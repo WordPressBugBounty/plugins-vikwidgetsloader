@@ -1,0 +1,38 @@
+.vikwp-widget-cnt {  		
+	display: flex;
+	flex-wrap: wrap;
+}
+.vikwp-widget-col {
+	flex: 1;
+}
+.vikwp-widget-col-inner {
+	background: #f6f6f6;
+	border: 1px solid #ddd;
+	padding: 10px;
+	margin: 5px;
+}
+.vikwp_widget_more.open {
+	margin-left: -200px;
+}
+.vikwp_widget_more_bigger.open {
+	margin-left: -500px;
+}
+.vikwp-widget-box {
+	background: #eee;
+	border: 1px solid #ddd;
+	padding: 10px;
+}
+.vikwp-widget-cnt label {
+	margin-bottom: 3px;
+	display: inline-block;
+}
+.vikwp-widget-spacing {
+  margin-bottom: 10px;
+}
+.vikwp-widget-spacing:last-child {
+  margin-bottom: 0px;
+}
+.wp-block-legacy-widget__edit-preview .components-disabled .wp-block-legacy-widget__edit-preview-iframe {
+    min-height: 100px !important;
+	height: auto !important;
+}
