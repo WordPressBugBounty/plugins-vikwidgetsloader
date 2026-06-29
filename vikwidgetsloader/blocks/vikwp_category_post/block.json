@@ -1,0 +1,19 @@
+{
+  "apiVersion": 3,
+  "name": "vikwp/category-post",
+  "title": "VikWP Category Post",
+  "category": "widgets",
+  "icon": "list-view",
+  "description": "Display posts from a selected category",
+  "editorScript": "file:../../build/vikwp_category_post/index.js",
+  "style": "vikwl_style",
+  "attributes": {
+    "title": { "type": "string", "default": "" },
+    "category_id": { "type": "number", "default": 0 },
+    "numb_limit": { "type": "number", "default": 4 },
+    "feat_image": { "type": "number", "default": 1 },
+    "title_linked": { "type": "number", "default": 1 },
+    "date_post": { "type": "number", "default": 1 },
+    "class_suffix": { "type": "string", "default": "" }
+  }
+}

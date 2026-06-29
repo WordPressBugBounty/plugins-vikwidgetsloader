@@ -2,8 +2,8 @@
 Contributors: e4jvikwp
 Tags: vik, widgets, slider, cookies, maps, grid, icons, carousel, tripadvisor
 Requires at least: 4.7
-Tested up to: 6.1
-Stable tag: trunk
+Tested up to: 7.0
+Stable tag: 1.11.0
 Requires PHP: 5.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -42,44 +42,16 @@ The installation also comes provided with a simple widgets guide, which you can 
 
 == Changelog ==
 
-= 1.0 =
-* First stable release of the VikWidgetsLoader
+= 1.10.0 =
+* Improved optimization minifying the CSS files.
 
-= 1.0.1 =
-* Fixed old function names being called instead of new ones
+= 1.10.1 =
+* Minor bug fixes.
 
-= 1.0.2 =
-* Changed Plugin Title in the WP Repository
-* Fixed minor checkbox issue in widgets page
-
-= 1.0.3 =
-* Update the widgets Grid Content, Icons and Text Slider with new options.
-* Fixed minor style issue in widgets page
-* Updated the FontAwesome Library to v5 and the Bootstrap library.
-
-* Updated the FontAwesome Library to v5 and the Bootstrap library.
-
-= 1.0.4 = 
-* Fixed little issues.
-
-= 1.0.5 = 
-* Added new widgets: VikCounters and VikCustomText.
-* Various bug fixes. 
-* Added new parameters in VikCategoryPost.
-
-= 1.0.6 = 
-* Bug fixes in the VikGridContent. 
-
-= 1.0.7 = 
-* Bug fixes in the VikCustomText. 
-
-= 1.0.8 = 
-* Bug fixes in the VikContentGrid for posts without images. 
-
-= 1.0.9 = 
-* Improved optimization minifying the css files.
-
-= 1.10.0 = 
-* Improved optimization minifying the css files.
-
-
+= 1.11.0 =
+* Added Gutenberg block support for all 11 widgets via Server-Side Rendering.
+* Added WordPress Media Manager picker for image fields in Gutenberg blocks.
+* Added searchable FontAwesome icon picker with live preview in the VikWP Icons block.
+* Added native color picker for color fields in Gutenberg blocks.
+* Fixed background color not being applied in VikWP Grid Content widget.
+* Updated WordPress compatibility to 7.0.

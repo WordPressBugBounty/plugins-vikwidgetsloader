@@ -12,6 +12,7 @@ defined('ABSPATH') or die('No script kiddies please!');
 
 $title 				= apply_filters( 'widget_title', $instance['title'] );
 $get_class_suffix 	= $instance['class_suffix'];
+
 $get_title_effect 	= $instance['title_effect'];
 $get_desc_effect 	= $instance['desc_effect'];
 $get_sentence_layout = $instance['testimonials_layout'];
@@ -30,8 +31,8 @@ $get_testimonial_post_title = $instance['testimonial_post_title'];
 // Fade
 $get_width 			= $instance['testimonial_box_width'];
 $get_height  = array_key_exists('testimonial_box_height', $instance) ? $instance['testimonial_box_height'] : '';
-$get_color_title = (isset($instance['testimonial_title_color']) && !empty($instance['testimonial_title_color']) ? $instance['testimonial_title_color'] : '#ffffff' );
-$get_color_desc = (isset($instance['testimonial_title_color']) && !empty($instance['testimonial_title_color']) ? $instance['testimonial_title_color'] : '#ffffff' );
+$get_color_title = (isset($instance['testimonial_title_color']) && !empty($instance['testimonial_title_color']) ? $instance['testimonial_title_color'] : '' );
+$get_color_desc = (isset($instance['testimonial_title_color']) && !empty($instance['testimonial_title_color']) ? $instance['testimonial_title_color'] : '' );
 
 $get_quotes 		= $instance['quotes'];
 $get_delay 			= $instance['testimonial_time_delay'];
@@ -45,10 +46,10 @@ $numb_xrow 			= (isset($instance['testimonials_xrow']) && !empty($instance['test
 $autoplayparam = (isset($instance['testimonials_autoplay']) && !empty($instance['testimonials_autoplay']) ? $instance['testimonials_autoplay'] : '0' );
 $autoplayparam_values = intval($autoplayparam) == 1 ? "true" : "false";
 
-$pagination 		= (isset($instance['testimonials_dots']));
+$pagination 		= $instance['testimonials_dots'];
 $pagination_values 	= intval($pagination) == 1 ? "true" : "false";
 
-$navigation 		= (isset($instance['testimonials_arrows']));
+$navigation 		= $instance['testimonials_arrows'];
 $navigation_values 	= intval($navigation) == 1 ? "true" : "false";
 
 global $post;
@@ -128,6 +129,7 @@ $rand_numb = rand(0, 15);
 							$descTestimonial = get_the_content();
 							$titleTestimonial = get_the_title();
 							$imgTestimonial = get_the_post_thumbnail_url(get_the_ID(),'medium-square');
+							
 						 	?>
 							<div class="vikqt_box vikqt-item-grid vikqt-item-lay_<?php echo $get_img_position; ?>">
 								<div class="vikqt-item-content vikqt-item-img_<?php echo $get_img_position; ?>">
@@ -147,6 +149,7 @@ $rand_numb = rand(0, 15);
 													<div class="vikqt_title" style="<?php echo ( !empty( $get_color_title ) ) ? 'color:'.$get_color_title.';' : ''; ?>"><?php echo $titleTestimonial; ?></div>
 												<?php }
 												} 
+
 												?>
 											</div>
 										<?php } ?>
@@ -212,9 +215,9 @@ $rand_numb = rand(0, 15);
 		jQuery(document).ready(function(){ 
 			jQuery("#vikqt-inner").owlCarousel({
 				items : <?php echo $numb_xrow; ?>,
-				autoPlay : <?php echo $autoplayparam_values; ?>,
-				navigation : <?php echo $navigation_values; ?>,
-				pagination : <?php echo $pagination_values; ?>,
+				autoplay : <?php echo $autoplayparam_values; ?>,
+				nav : <?php echo $navigation_values; ?>,
+				dots : <?php echo $pagination_values; ?>,
 				lazyLoad : true,
 				loop: true,
 				rewind: false,

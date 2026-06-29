@@ -1,0 +1,39 @@
+{
+  "apiVersion": 3,
+  "name": "vikwp/icons",
+  "title": "VikWP Icons",
+  "category": "widgets",
+  "icon": "star-filled",
+  "description": "Display icons with titles and descriptions",
+  "editorScript": "file:../../build/vikwp_icons/index.js",
+  "style": "vikwl_style",
+  "editorStyle": "vikwl_fontawesome",
+  "attributes": {
+    "title": { "type": "string", "default": "" },
+    "icons_displayed": { "type": "number", "default": 3 },
+    "icon_size": { "type": "string", "default": "24" },
+    "icon_style": { "type": "string", "default": "default" },
+    "container_size": { "type": "string", "default": "0" },
+    "icon_padding": { "type": "string", "default": "3" },
+    "readmoretext": { "type": "string", "default": "Read More" },
+    "readmore_target": { "type": "string", "default": "0" },
+    "content_alignment": { "type": "string", "default": "0" },
+    "icon_alignment": { "type": "string", "default": "top" },
+    "textarea_above": { "type": "string", "default": "" },
+    "class_suffix": { "type": "string", "default": "" },
+    "items": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "type":        { "type": "string" },
+          "selected":    { "type": "string" },
+          "title":       { "type": "string" },
+          "description": { "type": "string" },
+          "readmore":    { "type": "string" }
+        }
+      }
+    }
+  }
+}

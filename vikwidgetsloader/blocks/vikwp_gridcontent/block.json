@@ -1,0 +1,24 @@
+{
+  "apiVersion": 3,
+  "name": "vikwp/gridcontent",
+  "title": "VikWP Grid Content",
+  "category": "widgets",
+  "icon": "grid-view",
+  "description": "Display posts in a grid layout",
+  "editorScript": "file:../../build/vikwp_gridcontent/index.js",
+  "style": "vikwl_style",
+  "attributes": {
+    "title": { "type": "string", "default": "" },
+    "gridcont_category_id": { "type": "number", "default": 0 },
+    "gridcont_numb_limit": { "type": "number", "default": 2 },
+    "gridcont_excerpt": { "type": "number", "default": 0 },
+    "gridcont_readmore": { "type": "number", "default": 0 },
+    "gridcont_readmore_text": { "type": "string", "default": "Read more" },
+    "gridcont_number_of_rows": { "type": "number", "default": 1 },
+    "gridcont_ordering": { "type": "string", "default": "DESC" },
+    "gridcont_show_allposts": { "type": "number", "default": 0 },
+    "gridcont_text_allposts": { "type": "string", "default": "" },
+    "bg_color": { "type": "string", "default": "" },
+    "bg_image": { "type": "string", "default": "" }
+  }
+}

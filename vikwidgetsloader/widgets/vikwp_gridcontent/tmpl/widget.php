@@ -44,7 +44,7 @@ $pdet = array(
 $myposts = get_posts( $pdet );
 ?>
 <div class="container-fluid custom-fluid vikwp_gc_container-box <?php echo ( $get_numb_per_row > 1 ) ? 'vikwp_gc-cnt-multiple' : 'vikwp_gc-cnt-oneitem'; ?>">
-	<div class="vikwp_gc_bg<?php echo ( !empty( $get_bg_img ) ) ? ' vikwp_gc_bgimg' : ''; ?>" style="background-color: <?php echo ( !empty( $get_bg_color ) ) ? '$get_bg_color' : 'transparent'; ?>; <?php echo ( !empty( $get_bg_img ) ) ? 'background-image: url('.$get_bg_img.')' : ''; ?>">
+	<div class="vikwp_gc_bg<?php echo ( !empty( $get_bg_img ) ) ? ' vikwp_gc_bgimg' : ''; ?>" style="background-color: <?php echo ( !empty( $get_bg_color ) ) ? $get_bg_color : 'transparent'; ?>; <?php echo ( !empty( $get_bg_img ) ) ? 'background-image: url('.$get_bg_img.')' : ''; ?>">
 		<div class="vikwp_gc_cnt-mask"></div>
 			<div class="vikwp_gc_cnt-inner ">
 			<?php 

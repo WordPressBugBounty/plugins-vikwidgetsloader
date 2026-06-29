@@ -1,0 +1,46 @@
+{
+  "apiVersion": 3,
+  "name": "vikwp/googlemaps",
+  "title": "VikWP Google Maps",
+  "category": "widgets",
+  "icon": "location",
+  "description": "Google Maps widget with markers and contact info",
+  "editorScript": "file:../../build/vikwp_googlemaps/index.js",
+  "style": "vikwl_style",
+  "attributes": {
+    "title": { "type": "string", "default": "" },
+    "width": { "type": "string", "default": "" },
+    "height": { "type": "string", "default": "" },
+    "map_style": { "type": "number", "default": 0 },
+    "map_zoom": { "type": "number", "default": 15 },
+    "center_lat": { "type": "string", "default": "" },
+    "center_lng": { "type": "string", "default": "" },
+    "apikey": { "type": "string", "default": "" },
+    "shadowpoint_left": { "type": "number", "default": 16 },
+    "shadowpoint_right": { "type": "number", "default": 34 },
+    "markers_amount": { "type": "number", "default": 1 },
+    "contact_enabled": { "type": "number", "default": 0 },
+    "contact_header": { "type": "string", "default": "" },
+    "contact_position": { "type": "string", "default": "vikcnt_above" },
+    "contact_textarea_above": { "type": "string", "default": "" },
+    "contact_address": { "type": "string", "default": "" },
+    "contact_email": { "type": "string", "default": "" },
+    "contact_tel": { "type": "string", "default": "" },
+    "contact_textarea_under": { "type": "string", "default": "" },
+    "items": {
+      "type": "array",
+      "default": [{}],
+      "items": {
+        "type": "object",
+        "properties": {
+          "title":  { "type": "string" },
+          "lat":    { "type": "string" },
+          "lng":    { "type": "string" },
+          "text":   { "type": "string" },
+          "shape":  { "type": "string" },
+          "shadow": { "type": "string" }
+        }
+      }
+    }
+  }
+}

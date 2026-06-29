@@ -1,0 +1,31 @@
+{
+  "apiVersion": 3,
+  "name": "vikwp/counter",
+  "title": "VikWP Counter",
+  "category": "widgets",
+  "icon": "chart-bar",
+  "description": "Animated counter with icons",
+  "editorScript": "file:../../build/vikwp_counter/index.js",
+  "style": "vikwl_style",
+  "attributes": {
+    "title": { "type": "string", "default": "" },
+    "counter_displayed": { "type": "number", "default": 0 },
+    "counter_padding": { "type": "number", "default": 2 },
+    "class_suffix": { "type": "string", "default": "" },
+    "items": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "value":       { "type": "string" },
+          "title":       { "type": "string" },
+          "description": { "type": "string" },
+          "image":       { "type": "string" },
+          "selected":    { "type": "string" },
+          "type":        { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -17,3 +17,4 @@ require dirname(__FILE__).DIRECTORY_SEPARATOR."libraries".DIRECTORY_SEPARATOR."i
 require dirname(__FILE__).DIRECTORY_SEPARATOR."libraries".DIRECTORY_SEPARATOR."options.php";
 require dirname(__FILE__).DIRECTORY_SEPARATOR."libraries".DIRECTORY_SEPARATOR."register.php";
 require dirname(__FILE__).DIRECTORY_SEPARATOR."libraries".DIRECTORY_SEPARATOR."vikwl_widget.php";
+require dirname(__FILE__).DIRECTORY_SEPARATOR."libraries".DIRECTORY_SEPARATOR."blocks.php";

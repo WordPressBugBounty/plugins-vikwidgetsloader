@@ -1,0 +1,35 @@
+{
+  "apiVersion": 3,
+  "name": "vikwp/speakers",
+  "title": "VikWP Speakers",
+  "category": "widgets",
+  "icon": "groups",
+  "description": "Display team members or speakers with social links",
+  "editorScript": "file:../../build/vikwp_speakers/index.js",
+  "style": "vikwl_style",
+  "attributes": {
+    "title": { "type": "string", "default": "" },
+    "number_of_speakers": { "type": "number", "default": 0 },
+    "number_of_rows": { "type": "number", "default": 1 },
+    "textarea_above": { "type": "string", "default": "" },
+    "class_suffix": { "type": "string", "default": "" },
+    "items": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "image":       { "type": "string" },
+          "nominative":  { "type": "string" },
+          "role":        { "type": "string" },
+          "description": { "type": "string" },
+          "readmore":    { "type": "string" },
+          "facebook":    { "type": "string" },
+          "twitter":     { "type": "string" },
+          "google":      { "type": "string" },
+          "linkedin":    { "type": "string" }
+        }
+      }
+    }
+  }
+}

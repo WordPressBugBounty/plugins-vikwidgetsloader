@@ -1,0 +1,18 @@
+{
+  "apiVersion": 3,
+  "name": "vikwp/cookiespolicy",
+  "title": "VikWP Cookies Policy",
+  "category": "widgets",
+  "icon": "shield",
+  "description": "Cookie consent banner",
+  "editorScript": "file:../../build/vikwp_cookiespolicy/index.js",
+  "style": "vikwl_style",
+  "attributes": {
+    "title": { "type": "string", "default": "" },
+    "policy": { "type": "string", "default": "" },
+    "agree": { "type": "string", "default": "Ok" },
+    "articlelinkname": { "type": "string", "default": "Further information" },
+    "article": { "type": "number", "default": 0 },
+    "css_type": { "type": "string", "default": "bottom" }
+  }
+}

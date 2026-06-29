@@ -48,17 +48,26 @@ if(!empty($get_cnt_title)) {
 if(!empty($get_textarea_above)) {
 	$cnt .= '<div class="vikgm_cnt_item vikgm_cnt_textone">'.$get_textarea_above.'</div>';
 }
-if(!empty($get_cnt_address)) {
-	$cnt .= '<div class="vikgm_cnt_det vikgm_cnt_address"><i class="fa fa-map-marker"></i> <span>'.$get_cnt_address.'</span></div>';
+
+if(!empty($get_cnt_email) || !empty($get_cnt_telephone) || !empty($get_cnt_address)) {
+	$cnt .= '<div class="vikgm_cnt_det-container">';
 }
-if(!empty($get_cnt_email)) {
-	$cnt .= '<div class="vikgm_cnt_det vikgm_cnt_email"><i class="fa fa-envelope"></i> <span>'.$get_cnt_email.'</span></div>';
-}
-if(!empty($get_cnt_telephone)) {
-	$cnt .= '<div class="vikgm_cnt_det vikgm_cnt_tel"><i class="fa fa-phone"></i> <span>'.$get_cnt_telephone.'</span></div>';
-}
-if(!empty($get_textarea_under)) {
-	$cnt .= '<div class="vikgm_cnt_item vikgm_cnt_texttwo">'.$get_textarea_under.'</div>';
+
+	if(!empty($get_cnt_address)) {
+		$cnt .= '<div class="vikgm_cnt_det vikgm_cnt_address"><i class="fas fa-map-marker-alt"></i> <span>'.$get_cnt_address.'</span></div>';
+	}
+	if(!empty($get_cnt_email)) {
+		$cnt .= '<div class="vikgm_cnt_det vikgm_cnt_email"><i class="fas fa-envelope"></i> <span>'.$get_cnt_email.'</span></div>';
+	}
+	if(!empty($get_cnt_telephone)) {
+		$cnt .= '<div class="vikgm_cnt_det vikgm_cnt_tel"><i class="fas fa-phone"></i> <span>'.$get_cnt_telephone.'</span></div>';
+	}
+	if(!empty($get_textarea_under)) {
+		$cnt .= '<div class="vikgm_cnt_item vikgm_cnt_texttwo">'.$get_textarea_under.'</div>';
+	}
+
+if(!empty($get_cnt_email) || !empty($get_cnt_telephone) || !empty($get_cnt_address)) {
+	$cnt .= '</div>';
 }
 $cnt .= '</div></div>';
 
@@ -97,7 +106,6 @@ if (!empty($markers_amount)) {
 echo "<!-- Init VikGoogleMaps https://vikwp.com -->	";	?>
 
 	<?php
-	//Vale completa o cambia qua e poi togli il commento!:
 	$def_zoom = $instance['map_zoom'];
 	$def_center_lat = $instance['center_lat'];
 	$def_center_lng = $instance['center_lng'];

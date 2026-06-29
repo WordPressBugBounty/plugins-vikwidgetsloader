@@ -1,0 +1,24 @@
+{
+  "apiVersion": 3,
+  "name": "vikwp/tripadvisorreview",
+  "title": "VikWP TripAdvisor Review",
+  "category": "widgets",
+  "icon": "admin-site",
+  "description": "Embed TripAdvisor review widgets",
+  "editorScript": "file:../../build/vikwp_tripadvisorreview/index.js",
+  "style": "vikwl_style",
+  "attributes": {
+    "title": { "type": "string", "default": "" },
+    "typewidget": { "type": "number", "default": 0 },
+    "urlwebsite": { "type": "string", "default": "" },
+    "httptype": { "type": "string", "default": "0" },
+    "idhotel": { "type": "string", "default": "0000" },
+    "lantripadv": { "type": "string", "default": "en_US" },
+    "popularity": { "type": "string", "default": "1" },
+    "rating": { "type": "string", "default": "1" },
+    "writereview": { "type": "string", "default": "1" },
+    "border": { "type": "string", "default": "1" },
+    "size_thumb": { "type": "string", "default": "1" },
+    "rewlimit": { "type": "number", "default": 3 }
+  }
+}

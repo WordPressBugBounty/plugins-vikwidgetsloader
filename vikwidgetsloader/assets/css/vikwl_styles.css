@@ -826,6 +826,7 @@
 }
 .vikqt_text_cont {
     display: flex;
+    justify-content: center;
 }
 .vikqt-quotes {
     margin-right: 20px;
@@ -992,4 +993,15 @@
 .widget_vikwp_textslide .owl-loaded > .owl-nav {
 	text-align: center;
 	margin-top: 10px;
+}
+@media only screen and (max-width: 640px) {
+    .vikqt-container.container {
+        width: 100% !important;
+    }
+    .vikqt-container.container .vikqt-quotes {
+        font-size: 20px;
+    }
+    .vikqt-container.container .vikqt_text_cont {
+        padding: 25px;
+    }
 }

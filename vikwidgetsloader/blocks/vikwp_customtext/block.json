@@ -1,0 +1,15 @@
+{
+  "apiVersion": 3,
+  "name": "vikwp/customtext",
+  "title": "VikWP Custom Text",
+  "category": "widgets",
+  "icon": "editor-paragraph",
+  "description": "Display custom HTML/text content",
+  "editorScript": "file:../../build/vikwp_customtext/index.js",
+  "style": "vikwl_style",
+  "attributes": {
+    "title": { "type": "string", "default": "" },
+    "textarea": { "type": "string", "default": "" },
+    "class_suffix": { "type": "string", "default": "" }
+  }
+}

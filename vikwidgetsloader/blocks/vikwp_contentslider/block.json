@@ -1,0 +1,39 @@
+{
+  "apiVersion": 3,
+  "name": "vikwp/contentslider",
+  "title": "VikWP Content Slider",
+  "category": "widgets",
+  "icon": "slides",
+  "description": "Full-screen content slider with animations",
+  "editorScript": "file:../../build/vikwp_contentslider/index.js",
+  "style": "vikwl_style",
+  "attributes": {
+    "title": { "type": "string", "default": "" },
+    "number_of_slides": { "type": "number", "default": 0 },
+    "height": { "type": "string", "default": "400px" },
+    "interval": { "type": "number", "default": 2000 },
+    "font": { "type": "number", "default": 0 },
+    "title_effect": { "type": "string", "default": "zoomInRight" },
+    "desc_effect": { "type": "string", "default": "fadeInLeft" },
+    "readmore_effect": { "type": "string", "default": "fadeInLeft" },
+    "readmoretext": { "type": "string", "default": "" },
+    "textalign": { "type": "string", "default": "center" },
+    "autoplay": { "type": "string", "default": "0" },
+    "navigation": { "type": "string", "default": "1" },
+    "dotsnav": { "type": "string", "default": "0" },
+    "items": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "image":     { "type": "string" },
+          "title":     { "type": "string" },
+          "caption":   { "type": "string" },
+          "readmore":  { "type": "string" },
+          "published": { "type": "string" }
+        }
+      }
+    }
+  }
+}
