@@ -1,4 +1,4 @@
-.vikwl-container > form {
+.vikwl-container {
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -115,4 +115,22 @@
 .switch-ios input.ios-toggle-round:checked + label:after {
 	/*margin-left: 60px;*/
 	margin-left: 26px;
+}
+
+/* Compact variant, used for standard settings-table rows (e.g. General Settings). */
+.switch-ios-compact input.ios-toggle-round + label {
+	width: 38px;
+	height: 20px;
+}
+.switch-ios-compact input.ios-toggle-round + label:after {
+	width: 18px;
+}
+.switch-ios-compact input.ios-toggle-round:checked + label:after {
+	margin-left: 18px;
+}
+.vikwl-settings-table th {
+	width: 220px;
+}
+.vikwl-settings-table td .description {
+	max-width: 640px;
 }

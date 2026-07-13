@@ -103,14 +103,39 @@ function vikwl_register_blocks() {
 		'render_callback' => 'vikwl_render_block_textslide',
 	));
 
-	register_block_type($blocks_dir . 'vikwp_contentslider', array(
-		'render_callback' => 'vikwl_render_block_contentslider',
-	));
+	// vikwp_contentslider is discontinued (see vikwl_discontinued_widgets()): kept in the
+	// codebase for sites already using it, but no longer registered/offered for new use.
+	if (!in_array('vikwp_contentslider', vikwl_discontinued_widgets(), true)) {
+		register_block_type($blocks_dir . 'vikwp_contentslider', array(
+			'render_callback' => 'vikwl_render_block_contentslider',
+		));
+	}
 
 	register_block_type($blocks_dir . 'vikwp_tripadvisorreview', array(
 		'render_callback' => 'vikwl_render_block_tripadvisorreview',
 	));
 }
+
+/**
+ * The vikwp/icons block's render_callback runs while the_content is generated
+ * (i.e. in the page body), which is always AFTER wp_head() has already printed
+ * the enqueued styles. Enqueuing FontAwesome from inside the render_callback is
+ * therefore too late for it to ever be printed. has_block() can instead detect
+ * the block from the post content while wp_enqueue_scripts is still running,
+ * i.e. before wp_head() prints anything.
+ *
+ * Note: this only detects the block when placed in the current post/page
+ * content. A vikwp/icons block used in a block-based widget area is covered
+ * by the classic-widget style detection in widgets/vikwp_icons/vikwp_icons.php
+ * instead (is_active_widget()), not by this check.
+ */
+function vikwl_maybe_autoload_icons_fontawesome() {
+	if (has_block('vikwp/icons')) {
+		vikwl_autoload_fontawesome();
+	}
+}
+// Late priority so themes/other plugins have already registered their own FontAwesome, if any.
+add_action('wp_enqueue_scripts', 'vikwl_maybe_autoload_icons_fontawesome', 100);
 
 function vikwl_block_args() {
 	return array(
@@ -221,6 +246,9 @@ function vikwl_render_block_category_post($attributes) {
 }
 
 function vikwl_render_block_icons($attributes) {
+	// FontAwesome is auto-loaded (if needed) via vikwl_maybe_autoload_icons_fontawesome() on
+	// wp_enqueue_scripts, not here: by the time this render_callback runs, wp_head() has
+	// already printed the enqueued styles, so enqueuing it here would always be too late.
 	$widget = vikwl_get_widget('vikwp_icons', VIKWIDGETSLOADER_WIDGETROOT . 'vikwp_icons/vikwp_icons.php');
 
 	$instance = $attributes;

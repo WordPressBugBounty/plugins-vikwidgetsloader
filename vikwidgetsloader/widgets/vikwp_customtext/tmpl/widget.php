@@ -14,7 +14,8 @@ global $post;
 
 $title 		= apply_filters( 'widget_title', $instance['title'] );
 $get_text	= $instance['textarea'];
-$get_class_suffix = $instance['class_suffix'];
+$get_class_suffix = isset( $instance['class_suffix'] ) ? $instance['class_suffix'] : '';
+$get_class_suffix = implode( ' ', array_map( 'sanitize_html_class', explode( ' ', $get_class_suffix ) ) );
 
 $rand_id = rand(0, 999);
 
@@ -27,9 +28,9 @@ $rand_id = rand(0, 999);
 /** Add Class to widget container **/
 jQuery(document).ready(function() {
 	if ( jQuery('#vikcustext_container-<?php echo $rand_id; ?>').parents('.module').length ) {
-		jQuery('#vikcustext_container-<?php echo $rand_id; ?>').parents('.module').addClass('<?php echo $get_class_suffix; ?>');
+		jQuery('#vikcustext_container-<?php echo $rand_id; ?>').parents('.module').addClass('<?php echo esc_js( $get_class_suffix ); ?>');
 	} else {
-		jQuery('#vikcustext_container-<?php echo $rand_id; ?>').parent('div').addClass('<?php echo $get_class_suffix; ?>');
+		jQuery('#vikcustext_container-<?php echo $rand_id; ?>').parent('div').addClass('<?php echo esc_js( $get_class_suffix ); ?>');
 	}
 	
 });

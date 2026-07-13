@@ -26,16 +26,12 @@ class vikwp_icons extends VikWL_Widget {
 				wp_register_style('vikwl_style', VIKWIDGETSLOADER_ASSETS_URI . 'css/vikwl_styles.css', false, 1.0, 'all');
 				wp_enqueue_style('vikwl_style');
 
-				//FontAwesome
-				/*
-				 * Disabled FontAwesome beacuse has been always loaded from the VikWP theme.
-
-				wp_register_style('vikwpicons_fontawesome', VIKWIDGETSLOADER_ASSETS_URI . 'css/src/all.min.css', false, 1.0, 'all');
-				wp_enqueue_style('vikwpicons_fontawesome');
-				*/
+				//FontAwesome (auto-loaded only if not already available, see libraries/functions.php)
+				vikwl_autoload_fontawesome();
 			}
 		}
-		add_action('wp_enqueue_scripts', 'vikwp_icons_add_front_dependencies');
+		// Late priority so themes/other plugins have already registered their own FontAwesome, if any.
+		add_action('wp_enqueue_scripts', 'vikwp_icons_add_front_dependencies', 100);
 
 		function vikwp_icons_add_form_dependencies() {
 			if (get_current_screen()->base == "widgets") {

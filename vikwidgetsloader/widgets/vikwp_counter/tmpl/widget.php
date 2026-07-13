@@ -18,7 +18,8 @@ $get_number_items	= array_key_exists('counter_displayed', $instance) ? $instance
 $get_item_padding = (isset($instance['counter_padding']) && !empty($instance['counter_padding']) ? $instance['counter_padding'] : 2 );
 
 
-$get_class_suffix = array_key_exists('class_suffix', $instance) ? $instance['class_suffix'] : '';
+$get_class_suffix = isset( $instance['class_suffix'] ) ? $instance['class_suffix'] : '';
+$get_class_suffix = implode( ' ', array_map( 'sanitize_html_class', explode( ' ', $get_class_suffix ) ) );
 
 $rand_id = rand(0, 999);
 
@@ -136,9 +137,9 @@ jQuery(document).ready(function() {
 
 	/** Add Class to widget container **/
 	if ( jQuery('#vikcounter-<?php echo $rand_id; ?>').parents('.module').length ) {
-		jQuery('#vikcounter-<?php echo $rand_id; ?>').parents('.module').addClass('<?php echo $get_class_suffix; ?>');
+		jQuery('#vikcounter-<?php echo $rand_id; ?>').parents('.module').addClass('<?php echo esc_js( $get_class_suffix ); ?>');
 	} else {
-		jQuery('#vikcounter-<?php echo $rand_id; ?>').parent('div').addClass('<?php echo $get_class_suffix; ?>');
+		jQuery('#vikcounter-<?php echo $rand_id; ?>').parent('div').addClass('<?php echo esc_js( $get_class_suffix ); ?>');
 	}
 });
 </script>

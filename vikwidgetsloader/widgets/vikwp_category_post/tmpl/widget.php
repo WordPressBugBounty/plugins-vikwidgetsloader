@@ -20,7 +20,8 @@ $posts_limit = $instance['numb_limit'];
 $get_title_linked = (isset($instance['title_linked']) && !empty($instance['title_linked']) ? $instance['title_linked'] : '' );
 $show_img = (isset($instance['feat_image']) && !empty($instance['feat_image']) ? $instance['feat_image'] : '' );
 $get_post_date = (isset($instance['date_post']) && !empty($instance['date_post']) ? $instance['date_post'] : '' );
-$get_class_suffix = (isset($instance['class_suffix']) && !empty($instance['class_suffix']) ? $instance['class_suffix'] : '' );
+$get_class_suffix = isset( $instance['class_suffix'] ) ? $instance['class_suffix'] : '';
+$get_class_suffix = implode( ' ', array_map( 'sanitize_html_class', explode( ' ', $get_class_suffix ) ) );
 
 $rand_id = rand(0, 999);
 
@@ -74,9 +75,9 @@ $myposts = get_posts($pdet);
 /** Add Class to widget container **/
 jQuery(document).ready(function() {
 	if ( jQuery('#vikwp_category-<?php echo $rand_id; ?>').parents('.module').length ) {
-		jQuery('#vikwp_category-<?php echo $rand_id; ?>').parents('.module').addClass('<?php echo $get_class_suffix; ?>');
+		jQuery('#vikwp_category-<?php echo $rand_id; ?>').parents('.module').addClass('<?php echo esc_js( $get_class_suffix ); ?>');
 	} else {
-		jQuery('#vikwp_category-<?php echo $rand_id; ?>').parent('div').addClass('<?php echo $get_class_suffix; ?>');
+		jQuery('#vikwp_category-<?php echo $rand_id; ?>').parent('div').addClass('<?php echo esc_js( $get_class_suffix ); ?>');
 	}
 	
 });

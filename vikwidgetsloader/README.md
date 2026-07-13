@@ -4,7 +4,7 @@ A simple plugin used to load several widgets at once.
 ### Plugins currently supported:
 
 * Category Post
-* Content Slider
+* Content Slider _(discontinued: still bundled for existing sites, but no longer registered/offered for new use — see `vikwl_discontinued_widgets()` in `libraries/functions.php`)_
 * Cookies Policy
 * Google Maps
 * Grid Content

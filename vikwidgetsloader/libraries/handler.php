@@ -13,7 +13,11 @@ defined('ABSPATH') or die('No script kiddies please!');
 class VikWidgetsLoaderHandler {
 	public static function LoadAll() {
 		$disabled_widgets = get_option('vikwidgetsloader_disabled_widgets');
+		$discontinued_widgets = vikwl_discontinued_widgets();
 		foreach (glob(VIKWIDGETSLOADER_WIDGETROOT.'*',GLOB_ONLYDIR) as $widgetName) {
+			if (in_array(vikwl_stripDirectory($widgetName), $discontinued_widgets, true)) {
+				continue;
+			}
 			if(is_array($disabled_widgets) && !in_array(vikwl_stripDirectory($widgetName), $disabled_widgets)) {
 				require_once $widgetName.DIRECTORY_SEPARATOR.vikwl_directoryToFilename($widgetName);
 				register_widget(vikwl_stripDirectory($widgetName));

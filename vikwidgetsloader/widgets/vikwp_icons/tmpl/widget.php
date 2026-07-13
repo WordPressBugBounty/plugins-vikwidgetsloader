@@ -22,7 +22,8 @@ $get_style = array_key_exists('icon_style', $instance) ? $instance['icon_style']
 $icons_displayed = array_key_exists('icons_displayed', $instance) ? $instance['icons_displayed'] : 0;
 $readmore_target = array_key_exists('readmore_target', $instance) ? $instance['readmore_target'] : '0';
 $get_ico_align = array_key_exists('icon_alignment', $instance) ? $instance['icon_alignment'] : 'top';
-$get_class_suffix = array_key_exists('class_suffix', $instance) ? $instance['class_suffix'] : '';
+$get_class_suffix = isset( $instance['class_suffix'] ) ? $instance['class_suffix'] : '';
+$get_class_suffix = implode( ' ', array_map( 'sanitize_html_class', explode( ' ', $get_class_suffix ) ) );
 
 $rand_id = rand(0, 999);
 /* 
@@ -116,9 +117,9 @@ if ($icons_displayed > 0) {
 /** Add Class to widget container **/
 jQuery(document).ready(function() {
 	if ( jQuery('#vikic_container-<?php echo $rand_id; ?>').parents('.module').length ) {
-		jQuery('#vikic_container-<?php echo $rand_id; ?>').parents('.module').addClass('<?php echo $get_class_suffix; ?>');
+		jQuery('#vikic_container-<?php echo $rand_id; ?>').parents('.module').addClass('<?php echo esc_js( $get_class_suffix ); ?>');
 	} else {
-		jQuery('#vikic_container-<?php echo $rand_id; ?>').parent('div').addClass('<?php echo $get_class_suffix; ?>');
+		jQuery('#vikic_container-<?php echo $rand_id; ?>').parent('div').addClass('<?php echo esc_js( $get_class_suffix ); ?>');
 	}
 	
 });

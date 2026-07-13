@@ -11,7 +11,8 @@
 defined('ABSPATH') or die('No script kiddies please!');
 
 $title 				= apply_filters( 'widget_title', $instance['title'] );
-$get_class_suffix 	= $instance['class_suffix'];
+$get_class_suffix 	= isset( $instance['class_suffix'] ) ? $instance['class_suffix'] : '';
+$get_class_suffix 	= implode( ' ', array_map( 'sanitize_html_class', explode( ' ', $get_class_suffix ) ) );
 
 $get_title_effect 	= $instance['title_effect'];
 $get_desc_effect 	= $instance['desc_effect'];
@@ -295,9 +296,9 @@ $rand_numb = rand(0, 15);
 /** Add Class to widget container **/
 jQuery(document).ready(function() {
 	if ( jQuery('#vikwp_ts-<?php echo $rand_numb; ?>').parents('.module').length ) {
-		jQuery('#vikwp_ts-<?php echo $rand_numb; ?>').parents('.module').addClass('<?php echo $get_class_suffix; ?>');
+		jQuery('#vikwp_ts-<?php echo $rand_numb; ?>').parents('.module').addClass('<?php echo esc_js( $get_class_suffix ); ?>');
 	} else {
-		jQuery('#vikwp_ts-<?php echo $rand_numb; ?>').parent('div').addClass('<?php echo $get_class_suffix; ?>');
+		jQuery('#vikwp_ts-<?php echo $rand_numb; ?>').parent('div').addClass('<?php echo esc_js( $get_class_suffix ); ?>');
 	}
 	
 });
