@@ -10,12 +10,15 @@
 
 defined('ABSPATH') or die('No script kiddies please!');
 
-$idhotel = array_key_exists('idhotel', $instance) ? $instance['idhotel'] : '0000';
-$rewlimit = array_key_exists('rewlimit', $instance) ? $instance['rewlimit'] : 3;
-$lantripadv = array_key_exists('lantripadv', $instance) ? $instance['lantripadv'] : 'en_US';
-$urltrip = array_key_exists('urlwebsite', $instance) ? $instance['urlwebsite'] : '';
+$idhotel = isset( $instance['idhotel'] ) ? absint( $instance['idhotel'] ) : 0;
+$rewlimit = isset( $instance['rewlimit'] ) ? absint( $instance['rewlimit'] ) : 3;
+$lantripadv = isset( $instance['lantripadv'] ) ? $instance['lantripadv'] : 'en_US';
+$allowed_langs = array('en_US','en_UK','zh_CN','fr','de','el','it','no','pl','ru','es','th','tr');
+$lantripadv = in_array( $lantripadv, $allowed_langs, true ) ? $lantripadv : 'en_US';
+$urltrip = isset( $instance['urlwebsite'] ) ? $instance['urlwebsite'] : '';
 $get_widget = array_key_exists("typewidget", $instance) ? $instance["typewidget"] : 0;
-$get_protocol = array_key_exists("httptype", $instance) ? $instance["httptype"] : 'http';
+$get_protocol = isset( $instance['httptype'] ) ? $instance['httptype'] : '0';
+$get_protocol = in_array( $get_protocol, array('0','1'), true ) ? $get_protocol : '0';
 
 $idwidget = rand(0,100);
 
@@ -56,14 +59,14 @@ if($get_widget == 0) { ?>
 	<div id="TA_selfserveprop<?php echo $idwidget;?>" class="viktacnt TA_selfserveprop">
 		<ul id="LN6IRZ9U5XGS" class="TA_links SHjeWmHcfsW">
 		<li id="RudzFvi1Yl" class="6zFmqoPKmoWs"> 
-			<a target="_blank" href="<?php echo $urltrip; ?>"></a> 
+			<a target="_blank" href="<?php echo esc_url( $urltrip ); ?>"></a>
 		</li>
 		</ul>
 	</div>
 	<?php if($get_protocol == 1) { ?>
-		<script src="http://www.jscache.com/wejs?wtype=selfserveprop&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo $idhotel;?>&amp;lang=<?php echo $lantripadv;?>&amp;rating=<?php echo $valuerating;?>&amp;nreviews=<?php echo $rewlimit;?>&amp;writereviewlink=<?php echo $writerev;?>&amp;popIdx=<?php echo $valuepop;?>&amp;iswide=false&amp;border=<?php echo $borderbox;?>"></script>
+		<script src="http://www.jscache.com/wejs?wtype=selfserveprop&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo esc_attr( $idhotel ); ?>&amp;lang=<?php echo $lantripadv;?>&amp;rating=<?php echo $valuerating;?>&amp;nreviews=<?php echo $rewlimit;?>&amp;writereviewlink=<?php echo $writerev;?>&amp;popIdx=<?php echo $valuepop;?>&amp;iswide=false&amp;border=<?php echo $borderbox;?>"></script>
 	<?php } else { ?>
-		<script src="https://www.tripadvisor.com/WidgetEmbed-selfserveprop&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo $idhotel;?>&amp;lang=<?php echo $lantripadv;?>&amp;rating=<?php echo $valuerating;?>&amp;nreviews=<?php echo $rewlimit;?>&amp;writereviewlink=<?php echo $writerev;?>&amp;popIdx=<?php echo $valuepop;?>&amp;iswide=false&amp;border=<?php echo $borderbox;?>&display_version=2"></script>
+		<script src="https://www.tripadvisor.com/WidgetEmbed-selfserveprop&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo esc_attr( $idhotel ); ?>&amp;lang=<?php echo $lantripadv;?>&amp;rating=<?php echo $valuerating;?>&amp;nreviews=<?php echo $rewlimit;?>&amp;writereviewlink=<?php echo $writerev;?>&amp;popIdx=<?php echo $valuepop;?>&amp;iswide=false&amp;border=<?php echo $borderbox;?>&display_version=2"></script>
 	<?php }
 } 
 
@@ -77,9 +80,9 @@ if($get_widget == 1) { ?>
 		</ul>
 	</div>
 	<?php if($get_protocol == 1) { ?>
-		<script src="http://www.jscache.com/wejs?wtype=<?php echo $get_sizethumb;?>&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo $idhotel;?>&amp;lang=<?php echo $lantripadv;?>&amp;border=<?php echo $borderbox;?>&amp;shadow=false&amp;langversion=2"></script>
+		<script src="http://www.jscache.com/wejs?wtype=<?php echo $get_sizethumb;?>&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo esc_attr( $idhotel ); ?>&amp;lang=<?php echo $lantripadv;?>&amp;border=<?php echo $borderbox;?>&amp;shadow=false&amp;langversion=2"></script>
 	<?php } else { ?>
-		<script src="https://www.tripadvisor.com/WidgetEmbed-<?php echo $get_sizethumb;?>&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo $idhotel;?>&amp;lang=<?php echo $lantripadv;?>&amp;border=<?php echo $borderbox;?>&amp;shadow=false&amp;langversion=2"></script>
+		<script src="https://www.tripadvisor.com/WidgetEmbed-<?php echo $get_sizethumb;?>&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo esc_attr( $idhotel ); ?>&amp;lang=<?php echo $lantripadv;?>&amp;border=<?php echo $borderbox;?>&amp;shadow=false&amp;langversion=2"></script>
 	<?php }
 }
 
@@ -93,9 +96,9 @@ if($get_widget == 2) { ?>
 		</ul>
 	</div>
 	<?php if($get_protocol == 1) { ?>
-		<script src="http://www.jscache.com/wejs?wtype=percentRecommended&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo $idhotel;?>&amp;lang=<?php echo $lantripadv;?>&amp;border=<?php echo $borderbox;?>&amp;backgroundColor=white&amp;langversion=2"></script>
+		<script src="http://www.jscache.com/wejs?wtype=percentRecommended&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo esc_attr( $idhotel ); ?>&amp;lang=<?php echo $lantripadv;?>&amp;border=<?php echo $borderbox;?>&amp;backgroundColor=white&amp;langversion=2"></script>
 	<?php } else { ?>
-		<script src="https://www.tripadvisor.com/WidgetEmbed-percentRecommended&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo $idhotel;?>&amp;lang=<?php echo $lantripadv;?>&amp;border=<?php echo $borderbox;?>&amp;backgroundColor=white&amp;langversion=2"></script>
+		<script src="https://www.tripadvisor.com/WidgetEmbed-percentRecommended&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo esc_attr( $idhotel ); ?>&amp;lang=<?php echo $lantripadv;?>&amp;border=<?php echo $borderbox;?>&amp;backgroundColor=white&amp;langversion=2"></script>
 	<?php }
 }
 
@@ -109,9 +112,9 @@ if($get_widget == 3) { ?>
 		</ul>
 	</div>
 	<?php if($get_protocol == 1) { ?>
-		<script src="http://www.jscache.com/wejs?wtype=rated&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo $idhotel;?>&amp;lang=<?php echo $lantripadv;?>&amp;langversion=2"></script>
+		<script src="http://www.jscache.com/wejs?wtype=rated&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo esc_attr( $idhotel ); ?>&amp;lang=<?php echo $lantripadv;?>&amp;langversion=2"></script>
 	<?php } else { ?>
-		<script src="https://www.tripadvisor.com/WidgetEmbed-rated&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo $idhotel;?>&amp;lang=<?php echo $lantripadv;?>&amp;langversion=2"></script>
+		<script src="https://www.tripadvisor.com/WidgetEmbed-rated&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo esc_attr( $idhotel ); ?>&amp;lang=<?php echo $lantripadv;?>&amp;langversion=2"></script>
 	<?php }
 }
 
@@ -125,9 +128,9 @@ if($get_widget == 4) { ?>
 		</ul>
 	</div>
 	<?php if($get_protocol == 1) { ?>
-		<script src="http://www.jscache.com/wejs?wtype=excellent&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo $idhotel;?>&amp;lang=<?php echo $lantripadv;?>&amp;langversion=2"></script>
+		<script src="http://www.jscache.com/wejs?wtype=excellent&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo esc_attr( $idhotel ); ?>&amp;lang=<?php echo $lantripadv;?>&amp;langversion=2"></script>
 	<?php } else { ?>
-		<script src="https://www.tripadvisor.com/WidgetEmbed-excellent&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo $idhotel;?>&amp;lang=<?php echo $lantripadv;?>&amp;langversion=2"></script>
+		<script src="https://www.tripadvisor.com/WidgetEmbed-excellent&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo esc_attr( $idhotel ); ?>&amp;lang=<?php echo $lantripadv;?>&amp;langversion=2"></script>
 <?php }
 }
 
@@ -141,8 +144,8 @@ if($get_widget == 5) { ?>
 		</ul>
 	</div>
 	<?php if($get_protocol == 1) { ?>
-		<script src="http://www.jscache.com/wejs?wtype=linkingWidgetRedesign&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo $idhotel;?>&amp;lang=<?php echo $lantripadv;?>&amp;border=<?php echo $borderbox;?>&amp;langversion=2"></script>
+		<script src="http://www.jscache.com/wejs?wtype=linkingWidgetRedesign&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo esc_attr( $idhotel ); ?>&amp;lang=<?php echo $lantripadv;?>&amp;border=<?php echo $borderbox;?>&amp;langversion=2"></script>
 	<?php } else { ?>
-		<script src="https://www.tripadvisor.com/WidgetEmbed-linkingWidgetRedesign&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo $idhotel;?>&amp;lang=<?php echo $lantripadv;?>&amp;border=<?php echo $borderbox;?>&amp;langversion=2"></script>
+		<script src="https://www.tripadvisor.com/WidgetEmbed-linkingWidgetRedesign&amp;uniq=<?php echo $idwidget;?>&amp;locationId=<?php echo esc_attr( $idhotel ); ?>&amp;lang=<?php echo $lantripadv;?>&amp;border=<?php echo $borderbox;?>&amp;langversion=2"></script>
 <?php }
 }

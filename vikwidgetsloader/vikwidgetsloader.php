@@ -3,7 +3,7 @@
 Plugin Name:  VikWidgetsLoader
 Plugin URI:   https://wordpress.org/plugins/vikwidgetsloader/
 Description:  Plugin used to load several Widgets.
-Version:      1.12.0
+Version:      1.12.1
 Author:       E4J s.r.l.
 Author URI:   https://vikwp.com
 License:      GPL2

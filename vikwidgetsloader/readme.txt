@@ -3,7 +3,7 @@ Contributors: e4jvikwp
 Tags: vik, widgets, slider, cookies, maps, grid, icons, carousel, tripadvisor
 Requires at least: 4.7
 Tested up to: 7.0
-Stable tag: 1.12.0
+Stable tag: 1.12.1
 Requires PHP: 5.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -61,3 +61,9 @@ The installation also comes provided with a simple widgets guide, which you can 
 * Added an "Auto-load FontAwesome" setting (Settings > VikWidgetsLoader) to control the automatic loading above, for sites that prefer to manage FontAwesome themselves.
 * Fixed the icon picker in the VikWP Icons block only showing the first 80 matching icons; searches now return every matching icon from the full bundled set.
 * Removed the VikWP Content Slider widget from the widgets list, as it's no longer actively maintained. It remains available for existing sites already using it.
+
+= 1.12.1 =
+* Security: Hardened validation and sanitization of the timing fields (delay, fade in, fade out) in the VikWP Text Slide widget/block.
+* Security: Hardened validation and sanitization of the icon column width field in the VikWP Icons widget/block.
+* Security: Hardened validation and sanitization of marker coordinates in the VikWP Google Maps widget/block.
+* Security: Hardened validation and sanitization of the hotel ID, website URL, language and protocol fields in the VikWP Trip Advisor Review widget/block.

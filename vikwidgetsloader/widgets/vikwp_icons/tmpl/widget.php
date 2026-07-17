@@ -15,7 +15,7 @@ $arrslide = array();
 $get_link = array_key_exists('readmoretext', $instance) ? $instance['readmoretext'] : '';
 $get_textarea_above = array_key_exists('textarea_above', $instance) ? $instance['textarea_above'] : '';
 $get_size = array_key_exists('icon_size', $instance) ? (int) $instance['icon_size'] : 24;
-$get_paddingicon = array_key_exists('icon_padding', $instance) ? $instance['icon_padding'] : 3;
+$get_paddingicon = array_key_exists('icon_padding', $instance) ? (int) $instance['icon_padding'] : 3;
 $get_box_dim = array_key_exists('container_size', $instance) ? $instance['container_size'] : '0';
 $get_alignment = array_key_exists('content_alignment', $instance) ? $instance['content_alignment'] : '1';
 $get_style = array_key_exists('icon_style', $instance) ? $instance['icon_style'] : 'default';
@@ -102,7 +102,7 @@ if ($icons_displayed > 0) {
 			    <?php
 			    if (is_array($arrslide)) {
 					foreach($arrslide as $vsl) {
-						echo "<div class=\"vikicons-item col-xs-6 col-md-".$get_paddingicon." vikicons-".$get_size." vikicons-".$get_style."\">";
+						echo "<div class=\"vikicons-item col-xs-6 col-md-".esc_attr( $get_paddingicon )." vikicons-".$get_size." vikicons-".$get_style."\">";
 							echo $vsl;
 						echo "</div>";
 					}

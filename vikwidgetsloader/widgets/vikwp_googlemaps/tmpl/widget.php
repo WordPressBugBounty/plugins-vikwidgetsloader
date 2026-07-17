@@ -84,8 +84,8 @@ if (!empty($markers_amount)) {
 	for($v = 1; $v <= $instance['markers_amount']; $v++) {
 		if (array_key_exists('viktitle_'.$v, $instance)) {
 			$gettitle = $instance['viktitle_'.$v];
-			$getlat = $instance['viklat_'.$v];
-			$getlng = $instance['viklng_'.$v];
+			$getlat = isset( $instance['viklat_'.$v] ) ? (float) $instance['viklat_'.$v] : 0;
+			$getlng = isset( $instance['viklng_'.$v] ) ? (float) $instance['viklng_'.$v] : 0;
 			$gettext = $instance['viktext_'.$v];
 			$getshape = $instance['vikshape_'.$v];
 			$getshadow = $instance['vikshadow_'.$v];
@@ -125,7 +125,7 @@ echo "<!-- Init VikGoogleMaps https://vikwp.com -->	";	?>
 		foreach($arrmap as $k => $v) {
 		?>	
 			var marker<?php echo $k; ?> = new google.maps.Marker({
-				position: new google.maps.LatLng(<?php echo $v['latitude']; ?>, <?php echo $v['longitude']; ?>),
+				position: new google.maps.LatLng(<?php echo esc_js( $v['latitude'] ); ?>, <?php echo esc_js( $v['longitude'] ); ?>),
 				map: map,
 				title: '<?php echo addslashes($v['title']); ?>'
 				<?php
@@ -157,10 +157,10 @@ echo "<!-- Init VikGoogleMaps https://vikwp.com -->	";	?>
 		<?php
 		}
 		?>
-			var lat_min = <?php echo min($alllats); ?>;
-			var lat_max = <?php echo max($alllats); ?>;
-			var lng_min = <?php echo min($alllngs); ?>;
-			var lng_max = <?php echo max($alllngs); ?>;
+			var lat_min = <?php echo esc_js( min($alllats) ); ?>;
+			var lat_max = <?php echo esc_js( max($alllats) ); ?>;
+			var lng_min = <?php echo esc_js( min($alllngs) ); ?>;
+			var lng_max = <?php echo esc_js( max($alllngs) ); ?>;
 			<?php
 			if(empty($def_zoom)) {
 			?>

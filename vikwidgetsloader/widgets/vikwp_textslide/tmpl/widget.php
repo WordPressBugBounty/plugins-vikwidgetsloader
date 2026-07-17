@@ -36,9 +36,9 @@ $get_color_title = (isset($instance['testimonial_title_color']) && !empty($insta
 $get_color_desc = (isset($instance['testimonial_title_color']) && !empty($instance['testimonial_title_color']) ? $instance['testimonial_title_color'] : '' );
 
 $get_quotes 		= $instance['quotes'];
-$get_delay 			= $instance['testimonial_time_delay'];
-$get_fadein 		= $instance['testimonial_time_fadein'];
-$get_fadeout 		= $instance['testimonial_time_fadeout'];
+$get_delay 			= isset( $instance['testimonial_time_delay'] ) ? (float) $instance['testimonial_time_delay'] : 0;
+$get_fadein 		= isset( $instance['testimonial_time_fadein'] ) ? (float) $instance['testimonial_time_fadein'] : 0;
+$get_fadeout 		= isset( $instance['testimonial_time_fadeout'] ) ? (float) $instance['testimonial_time_fadeout'] : 0;
 
 // Carousel
 $get_img_position 	= $instance['testimonials_img_pos'];
@@ -201,9 +201,9 @@ $rand_numb = rand(0, 15);
 		    function showNextQuote() {
 		        ++quoteIndex;
 		        quotes.eq(quoteIndex % quotes.length)
-		            .fadeIn(<?php echo $get_delay; ?>)
-		            .delay(<?php echo $get_fadein; ?>)
-		            .fadeOut(<?php echo $get_fadeout; ?>, showNextQuote);
+		            .fadeIn(<?php echo esc_js( $get_delay ); ?>)
+		            .delay(<?php echo esc_js( $get_fadein ); ?>)
+		            .fadeOut(<?php echo esc_js( $get_fadeout ); ?>, showNextQuote);
 		    }
 		    
 		    showNextQuote();
