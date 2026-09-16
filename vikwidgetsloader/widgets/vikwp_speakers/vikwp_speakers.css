@@ -7,6 +7,7 @@
 .viksp-speaker {
     float: left;
     display: inline-block;
+    box-sizing: border-box;
     padding: 0 15px;
     position: relative;
     margin: 5px 0;

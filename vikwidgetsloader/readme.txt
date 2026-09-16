@@ -2,8 +2,8 @@
 Contributors: e4jvikwp
 Tags: vik, widgets, slider, cookies, maps, grid, icons, carousel, tripadvisor
 Requires at least: 4.7
-Tested up to: 7.0
-Stable tag: 1.12.1
+Tested up to: 7.1
+Stable tag: 1.12.2
 Requires PHP: 5.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -67,3 +67,8 @@ The installation also comes provided with a simple widgets guide, which you can 
 * Security: Hardened validation and sanitization of the icon column width field in the VikWP Icons widget/block.
 * Security: Hardened validation and sanitization of marker coordinates in the VikWP Google Maps widget/block.
 * Security: Hardened validation and sanitization of the hotel ID, website URL, language and protocol fields in the VikWP Trip Advisor Review widget/block.
+
+= 1.12.2 =
+* Fixed a PHP fatal error in the VikWP Speakers widget/block that could break saving from the block-based Widgets screen whenever a person's image field was left empty.
+* Fixed the "Number of Rows" setting in the VikWP Speakers widget/block being ignored, so items always rendered in a single row regardless of the configured row count.
+* Fixed items in the VikWP Speakers widget/block wrapping to fewer per row than configured due to padding not being accounted for in the row width calculation.

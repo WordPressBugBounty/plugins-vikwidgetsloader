@@ -11,7 +11,7 @@
 defined('ABSPATH') or die('No script kiddies please!');
 
 // Plugin Version
-define("VIKWIDGETSLOADER_VERSION", '1.12.1');
+define("VIKWIDGETSLOADER_VERSION", '1.12.2');
 // Language Folder
 define("VIKWIDGETSLOADER_LANGUAGEROOT", basename(dirname(__FILE__)).DIRECTORY_SEPARATOR."languages".DIRECTORY_SEPARATOR);
 // Widgets Folder

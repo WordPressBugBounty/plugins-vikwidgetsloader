@@ -13,16 +13,18 @@ defined('ABSPATH') or die('No script kiddies please!');
 $arrslide = array();
 
 $number_of_speakers = array_key_exists('number_of_speakers', $instance) ? $instance['number_of_speakers'] : '';
-$get_numb = array_key_exists('number_of_rows', $instance) ? $instance['number_of_rows'] : '';
+$get_numb = (array_key_exists('number_of_rows', $instance) && !empty($instance['number_of_rows'])) ? $instance['number_of_rows'] : 1;
 $get_textarea_above = array_key_exists('textarea_above', $instance) ? $instance['textarea_above'] : '';
-$itemwidth = (100/$number_of_speakers);
+
+$items_per_row = $get_numb > 0 ? ceil($number_of_speakers / $get_numb) : $number_of_speakers;
+$itemwidth = $items_per_row > 0 ? (100 / $items_per_row) : 0;
 
 $first_height = 0;
 
 if ($number_of_speakers > 0) {
 	for ($i = 1; $i <= $number_of_speakers; $i++) { 
 		$imgabpath = array_key_exists('spkr_' . $i . '_image', $instance) ? $instance['spkr_' . $i . '_image'] : "";
-		$img_size = @getimagesize($imgabpath);
+		$img_size = !empty($imgabpath) ? @getimagesize($imgabpath) : false;
 		$first_height = $img_size && !($first_height > 0) ? $img_size[1] : $first_height;
 		$slider_entry = '<div id="viksp-inner" class="viksp-inner">';
 		$slider_entry .= '<div class="viksp-divimg">';
