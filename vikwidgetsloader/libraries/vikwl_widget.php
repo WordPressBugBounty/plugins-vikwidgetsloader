@@ -45,7 +45,7 @@ class VikWL_Widget extends WP_Widget {
 		if ($file == 'widget') {
 			echo $args['before_widget'];
 			if (isset($instance['title']) && !empty($instance['title'])) {
-				echo $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
+				echo $args['before_title'] . wp_kses_post(apply_filters('widget_title', $instance['title'])) . $args['after_title'];
 			}
 			include $this->modpath . DIRECTORY_SEPARATOR . 'tmpl' . DIRECTORY_SEPARATOR . $file . '.php';
 			echo $args['after_widget'];

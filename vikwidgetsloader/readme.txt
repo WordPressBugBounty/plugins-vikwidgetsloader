@@ -3,7 +3,7 @@ Contributors: e4jvikwp
 Tags: vik, widgets, slider, cookies, maps, grid, icons, carousel, tripadvisor
 Requires at least: 4.7
 Tested up to: 7.1
-Stable tag: 1.12.2
+Stable tag: 1.12.3
 Requires PHP: 5.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -41,11 +41,28 @@ The installation also comes provided with a simple widgets guide, which you can 
 
 == Changelog ==
 
-= 1.10.0 =
-* Improved optimization minifying the CSS files.
+= 1.12.3 =
+* Security: Fixed a stored Cross-Site Scripting (XSS) vulnerability in the VikWP Speakers and VikWP Cookies Policy blocks, where a user with the Contributor role could add an event handler through the read more/social links of a speaker or the module position field. Thanks to Salúa Es-sair for responsibly reporting the issue through WPScan.
+* Security: Every widget/block value is now escaped for the context it's printed in (URLs, HTML attributes, inline styles and scripts) and enumeration fields are validated against their allowed values, in all the widgets: Speakers, Cookies Policy, Counter, Icons, Grid Content, Text Slide, Google Maps and Content Slider.
+* Security: The VikWP Speakers widget/block no longer makes a server-side request to the image URL of each person while rendering.
 
-= 1.10.1 =
-* Minor bug fixes.
+= 1.12.2 =
+* Fixed a PHP fatal error in the VikWP Speakers widget/block that could break saving from the block-based Widgets screen whenever a person's image field was left empty.
+* Fixed the "Number of Rows" setting in the VikWP Speakers widget/block being ignored, so items always rendered in a single row regardless of the configured row count.
+* Fixed items in the VikWP Speakers widget/block wrapping to fewer per row than configured due to padding not being accounted for in the row width calculation.
+
+= 1.12.1 =
+* Security: Hardened validation and sanitization of the timing fields (delay, fade in, fade out) in the VikWP Text Slide widget/block.
+* Security: Hardened validation and sanitization of the icon column width field in the VikWP Icons widget/block.
+* Security: Hardened validation and sanitization of marker coordinates in the VikWP Google Maps widget/block.
+* Security: Hardened validation and sanitization of the hotel ID, website URL, language and protocol fields in the VikWP Trip Advisor Review widget/block.
+
+= 1.12.0 =
+* Security: Hardened sanitization of the CSS class field in all widgets.
+* Fixed FontAwesome icons not displaying on the frontend in the VikWP Icons widget/block when the active theme doesn't already load FontAwesome; the bundled copy is now loaded automatically, only when needed.
+* Added an "Auto-load FontAwesome" setting (Settings > VikWidgetsLoader) to control the automatic loading above, for sites that prefer to manage FontAwesome themselves.
+* Fixed the icon picker in the VikWP Icons block only showing the first 80 matching icons; searches now return every matching icon from the full bundled set.
+* Removed the VikWP Content Slider widget from the widgets list, as it's no longer actively maintained. It remains available for existing sites already using it.
 
 = 1.11.0 =
 * Added Gutenberg block support for all 11 widgets via Server-Side Rendering.
@@ -55,20 +72,8 @@ The installation also comes provided with a simple widgets guide, which you can 
 * Fixed background color not being applied in VikWP Grid Content widget.
 * Updated WordPress compatibility to 7.0.
 
-= 1.12.0 =
-* Security: Hardened sanitization of the CSS class field in all widgets.
-* Fixed FontAwesome icons not displaying on the frontend in the VikWP Icons widget/block when the active theme doesn't already load FontAwesome; the bundled copy is now loaded automatically, only when needed.
-* Added an "Auto-load FontAwesome" setting (Settings > VikWidgetsLoader) to control the automatic loading above, for sites that prefer to manage FontAwesome themselves.
-* Fixed the icon picker in the VikWP Icons block only showing the first 80 matching icons; searches now return every matching icon from the full bundled set.
-* Removed the VikWP Content Slider widget from the widgets list, as it's no longer actively maintained. It remains available for existing sites already using it.
+= 1.10.1 =
+* Minor bug fixes.
 
-= 1.12.1 =
-* Security: Hardened validation and sanitization of the timing fields (delay, fade in, fade out) in the VikWP Text Slide widget/block.
-* Security: Hardened validation and sanitization of the icon column width field in the VikWP Icons widget/block.
-* Security: Hardened validation and sanitization of marker coordinates in the VikWP Google Maps widget/block.
-* Security: Hardened validation and sanitization of the hotel ID, website URL, language and protocol fields in the VikWP Trip Advisor Review widget/block.
-
-= 1.12.2 =
-* Fixed a PHP fatal error in the VikWP Speakers widget/block that could break saving from the block-based Widgets screen whenever a person's image field was left empty.
-* Fixed the "Number of Rows" setting in the VikWP Speakers widget/block being ignored, so items always rendered in a single row regardless of the configured row count.
-* Fixed items in the VikWP Speakers widget/block wrapping to fewer per row than configured due to padding not being accounted for in the row width calculation.
+= 1.10.0 =
+* Improved optimization minifying the CSS files.

@@ -18,10 +18,10 @@ $get_size = array_key_exists('icon_size', $instance) ? (int) $instance['icon_siz
 $get_paddingicon = array_key_exists('icon_padding', $instance) ? (int) $instance['icon_padding'] : 3;
 $get_box_dim = array_key_exists('container_size', $instance) ? $instance['container_size'] : '0';
 $get_alignment = array_key_exists('content_alignment', $instance) ? $instance['content_alignment'] : '1';
-$get_style = array_key_exists('icon_style', $instance) ? $instance['icon_style'] : 'default';
-$icons_displayed = array_key_exists('icons_displayed', $instance) ? $instance['icons_displayed'] : 0;
+$get_style = vikwl_allowed_value(array_key_exists('icon_style', $instance) ? $instance['icon_style'] : '', array('default', 'circle'), 'default');
+$icons_displayed = array_key_exists('icons_displayed', $instance) ? (int) $instance['icons_displayed'] : 0;
 $readmore_target = array_key_exists('readmore_target', $instance) ? $instance['readmore_target'] : '0';
-$get_ico_align = array_key_exists('icon_alignment', $instance) ? $instance['icon_alignment'] : 'top';
+$get_ico_align = vikwl_allowed_value(array_key_exists('icon_alignment', $instance) ? $instance['icon_alignment'] : '', array('top', 'right', 'bottom', 'left'), 'top');
 $get_class_suffix = isset( $instance['class_suffix'] ) ? $instance['class_suffix'] : '';
 $get_class_suffix = implode( ' ', array_map( 'sanitize_html_class', explode( ' ', $get_class_suffix ) ) );
 
@@ -57,12 +57,15 @@ if ( $get_style == "circle" ) {
 <?php 
 if ($icons_displayed > 0) {
 	for ($i=0; $i < $icons_displayed; $i++) { 
+		$get_icon_class = vikwl_allowed_value(isset($instance['icon_'.$i.'_type']) ? $instance['icon_'.$i.'_type'] : '', array('fa', 'far', 'fas', 'fab'), 'fas');
+		$get_icon_class .= ' fa-' . vikwl_css_classes(isset($instance['icon_'.$i.'_selected']) ? $instance['icon_'.$i.'_selected'] : '');
+
 		$slider_entry = '<div class="vikicons-item-inner vikicons-item-'.$get_ico_align.'">';
 			$slider_entry .= '<div class="vikicons-item-icon">';
 				$slider_entry .= '<span class="vikicons-item-icoelem" style="height:'.$get_general_size.'px; width:'.$get_general_size.'px;">';
 				
 				if (!empty($instance['icon_'.$i.'_readmore'])) {
-					$slider_entry .= '<a href="'.$instance['icon_'.$i.'_readmore'].'" ';
+					$slider_entry .= '<a href="'.esc_url($instance['icon_'.$i.'_readmore']).'" ';
 					if($readmore_target == 0) { 
 						$slider_entry .= 'target="_blank"';
 					}
@@ -70,9 +73,9 @@ if ($icons_displayed > 0) {
 				}
 					
 					if ( $get_style == "circle" ) {
-						$slider_entry .= '<i class="'.$instance['icon_'.$i.'_type'].' fa-'.$instance['icon_'.$i.'_selected'].'" style="line-height: '.$get_general_size.'px; font-size: '.$get_size.'px;"></i>';
+						$slider_entry .= '<i class="'.esc_attr($get_icon_class).'" style="line-height: '.$get_general_size.'px; font-size: '.$get_size.'px;"></i>';
 					} else {
-						$slider_entry .= '<i class="'.$instance['icon_'.$i.'_type'].' fa-'.$instance['icon_'.$i.'_selected'].'" style="font-size: '.$get_size.'px;"></i>';
+						$slider_entry .= '<i class="'.esc_attr($get_icon_class).'" style="font-size: '.$get_size.'px;"></i>';
 					}
 					
 				if (!empty($instance['icon_'.$i.'_readmore'])) {
@@ -83,10 +86,10 @@ if ($icons_displayed > 0) {
 			$slider_entry .= '</div>';
 			$slider_entry .= '<div class="vikicons-item-text">';
 				if (!empty($instance['icon_'.$i.'_title'])) {
-					$slider_entry .= '<h3>'.$instance['icon_'.$i.'_title'].'</h3>';
+					$slider_entry .= '<h3>'.wp_kses_post($instance['icon_'.$i.'_title']).'</h3>';
 				}
 				if (!empty($instance['icon_'.$i.'_description'])) {
-					$slider_entry .= '<p>'.$instance['icon_'.$i.'_description'].'</p>';
+					$slider_entry .= '<p>'.wp_kses_post($instance['icon_'.$i.'_description']).'</p>';
 				}
 			$slider_entry .= '</div>';
 		$slider_entry .= '</div>';
@@ -95,7 +98,7 @@ if ($icons_displayed > 0) {
 	?>
 	<div id="vikic_container-<?php echo $rand_id; ?>" class="vikicons-container container<?php if($get_box_dim == 1) { echo "-fluid"; } ?>">
 		<?php if(!empty($get_textarea_above)) { ?>
-		<div class="vikicons-topdesc"><?php echo $get_textarea_above; ?></div>
+		<div class="vikicons-topdesc"><?php echo wp_kses_post($get_textarea_above); ?></div>
 		<?php } ?>
 		<div class="vikicons-inner container-fluid">
 			<div class="vikicons-set d-flex flex-wrap <?php if($get_alignment == 0) { echo "vikicons-align-center"; } ?>">

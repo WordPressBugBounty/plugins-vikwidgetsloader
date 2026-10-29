@@ -16,18 +16,22 @@ if (array_key_exists('vcp_a', $_COOKIE)) {
 	$cookies = $_COOKIE['vcp_a'];
 }
 
-$article = array_key_exists('article', $instance) ? get_page($instance['article'], 'ARRAY_A') : array('guid' => "");
+$article = array_key_exists('article', $instance) ? get_page((int) $instance['article'], 'ARRAY_A') : null;
+$article_url = $article && !empty($article['guid']) ? $article['guid'] : '';
+
+// the position is an enumeration: anything else falls back to the default one
+$css_type = vikwl_allowed_value(array_key_exists('css_type', $instance) ? $instance['css_type'] : '', array('bottom', 'top', 'middle'), 'bottom');
 
 if(!$cookies) {
 ?>
 
 <div class="vikcp-policy-container">
-    <div class="vikcp-policy-inner vikcp-policy-display-<?php echo array_key_exists('css_type', $instance) ? $instance['css_type'] : 'bottom';?>">
-		<span class="vikcp-policy-message"><?php echo array_key_exists('policy', $instance) ? $instance['policy'] : ''; ?></span>
+    <div class="vikcp-policy-inner vikcp-policy-display-<?php echo esc_attr($css_type); ?>">
+		<span class="vikcp-policy-message"><?php echo array_key_exists('policy', $instance) ? wp_kses_post($instance['policy']) : ''; ?></span>
 <?php if (array_key_exists('article', $instance)) { ?>
-		<span class="vikcp-policy-link"><a href="<?php echo $article['guid'];?>"><?php echo array_key_exists('articlelinkname', $instance) ? $instance['articlelinkname'] : ''; ?></a></span>
+		<span class="vikcp-policy-link"><a href="<?php echo esc_url($article_url); ?>"><?php echo array_key_exists('articlelinkname', $instance) ? wp_kses_post($instance['articlelinkname']) : ''; ?></a></span>
 <?php } ?>
-		<button id="vikcp-policy-btn" onclick="" type="button"><?php echo array_key_exists('agree', $instance) ? $instance['agree'] : ''; ?></button>
+		<button id="vikcp-policy-btn" onclick="" type="button"><?php echo array_key_exists('agree', $instance) ? wp_kses_post($instance['agree']) : ''; ?></button>
     </div>
 </div>
 

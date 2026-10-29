@@ -19,18 +19,16 @@ $mapstyles = array(
 $arrmap = array();
 $alllats = array();
 $alllngs = array();
-$apikeygm = $instance['apikey'];
+$apikeygm = isset($instance['apikey']) && is_scalar($instance['apikey']) ? trim((string) $instance['apikey']) : '';
 
 $vikgooglemapsid = rand(1, 17);
-$width = $instance['width'];
-$width = empty($width) ? '100%' : $width;
-$height = $instance['height'];
-$height = empty($height) ? '200px' : $height;
+$width = vikwl_css_size(isset($instance['width']) ? $instance['width'] : '', '100%');
+$height = vikwl_css_size(isset($instance['height']) ? $instance['height'] : '', '200px');
 
-$shadowpointleft = $instance['shadowpoint_left'];
-$shadowpointright = $instance['shadowpoint_right'];
+$shadowpointleft = isset($instance['shadowpoint_left']) ? (int) $instance['shadowpoint_left'] : 0;
+$shadowpointright = isset($instance['shadowpoint_right']) ? (int) $instance['shadowpoint_right'] : 0;
 
-$getmapstyle = $mapstyles[$instance['map_style']];
+$getmapstyle = isset($instance['map_style']) && isset($mapstyles[(int) $instance['map_style']]) ? $mapstyles[(int) $instance['map_style']] : $mapstyles[0];
 
 $get_textarea_above = array_key_exists('contact_textarea_above', $instance) ? $instance['contact_textarea_above'] : "";
 $get_textarea_under = array_key_exists('contact_textarea_under', $instance) ? $instance['contact_textarea_under'] : "";
@@ -43,10 +41,10 @@ $get_cnt_title = array_key_exists('contact_header', $instance) ? $instance['cont
 $cnt = '';
 $cnt .= '<div class="vikgm_cnt_container"><div class="vikgm_cnt_inner">';
 if(!empty($get_cnt_title)) {
-	$cnt .= '<div class="vikgm_cnt_item vikgm_cnt_title"><h3>'.$get_cnt_title.'</h3></div>';
+	$cnt .= '<div class="vikgm_cnt_item vikgm_cnt_title"><h3>'.wp_kses_post($get_cnt_title).'</h3></div>';
 }
 if(!empty($get_textarea_above)) {
-	$cnt .= '<div class="vikgm_cnt_item vikgm_cnt_textone">'.$get_textarea_above.'</div>';
+	$cnt .= '<div class="vikgm_cnt_item vikgm_cnt_textone">'.wp_kses_post($get_textarea_above).'</div>';
 }
 
 if(!empty($get_cnt_email) || !empty($get_cnt_telephone) || !empty($get_cnt_address)) {
@@ -54,16 +52,16 @@ if(!empty($get_cnt_email) || !empty($get_cnt_telephone) || !empty($get_cnt_addre
 }
 
 	if(!empty($get_cnt_address)) {
-		$cnt .= '<div class="vikgm_cnt_det vikgm_cnt_address"><i class="fas fa-map-marker-alt"></i> <span>'.$get_cnt_address.'</span></div>';
+		$cnt .= '<div class="vikgm_cnt_det vikgm_cnt_address"><i class="fas fa-map-marker-alt"></i> <span>'.wp_kses_post($get_cnt_address).'</span></div>';
 	}
 	if(!empty($get_cnt_email)) {
-		$cnt .= '<div class="vikgm_cnt_det vikgm_cnt_email"><i class="fas fa-envelope"></i> <span>'.$get_cnt_email.'</span></div>';
+		$cnt .= '<div class="vikgm_cnt_det vikgm_cnt_email"><i class="fas fa-envelope"></i> <span>'.wp_kses_post($get_cnt_email).'</span></div>';
 	}
 	if(!empty($get_cnt_telephone)) {
-		$cnt .= '<div class="vikgm_cnt_det vikgm_cnt_tel"><i class="fas fa-phone"></i> <span>'.$get_cnt_telephone.'</span></div>';
+		$cnt .= '<div class="vikgm_cnt_det vikgm_cnt_tel"><i class="fas fa-phone"></i> <span>'.wp_kses_post($get_cnt_telephone).'</span></div>';
 	}
 	if(!empty($get_textarea_under)) {
-		$cnt .= '<div class="vikgm_cnt_item vikgm_cnt_texttwo">'.$get_textarea_under.'</div>';
+		$cnt .= '<div class="vikgm_cnt_item vikgm_cnt_texttwo">'.wp_kses_post($get_textarea_under).'</div>';
 	}
 
 if(!empty($get_cnt_email) || !empty($get_cnt_telephone) || !empty($get_cnt_address)) {
@@ -73,22 +71,23 @@ $cnt .= '</div></div>';
 
 $stylesize = '';
 if (!empty($width) && !empty($height)) {
-	$stylesize .= 'style="width: '.$width.'; height: '.$height.';"';
+	$stylesize .= 'style="width: '.esc_attr($width).'; height: '.esc_attr($height).';"';
 }else {
 	$stylesize .= 'style="width: 100%; height: 200px;"';
 }
 
-$markers_amount = $instance['markers_amount'];
+$arrmap = array();
+$markers_amount = isset($instance['markers_amount']) ? (int) $instance['markers_amount'] : 0;
 
 if (!empty($markers_amount)) {
-	for($v = 1; $v <= $instance['markers_amount']; $v++) {
+	for($v = 1; $v <= $markers_amount; $v++) {
 		if (array_key_exists('viktitle_'.$v, $instance)) {
-			$gettitle = $instance['viktitle_'.$v];
+			$gettitle = is_scalar($instance['viktitle_'.$v]) ? (string) $instance['viktitle_'.$v] : '';
 			$getlat = isset( $instance['viklat_'.$v] ) ? (float) $instance['viklat_'.$v] : 0;
 			$getlng = isset( $instance['viklng_'.$v] ) ? (float) $instance['viklng_'.$v] : 0;
-			$gettext = $instance['viktext_'.$v];
-			$getshape = $instance['vikshape_'.$v];
-			$getshadow = $instance['vikshadow_'.$v];
+			$gettext = isset( $instance['viktext_'.$v] ) && is_scalar( $instance['viktext_'.$v] ) ? (string) $instance['viktext_'.$v] : '';
+			$getshape = isset( $instance['vikshape_'.$v] ) && is_scalar( $instance['vikshape_'.$v] ) ? esc_url_raw( $instance['vikshape_'.$v] ) : '';
+			$getshadow = isset( $instance['vikshadow_'.$v] ) && is_scalar( $instance['vikshadow_'.$v] ) ? esc_url_raw( $instance['vikshadow_'.$v] ) : '';
 			if (!empty($getlat) && !empty($getlng)) {
 				$arrmap[$v]['latitude'] = $getlat;
 				$alllats[] = $getlat;
@@ -111,11 +110,11 @@ echo "<!-- Init VikGoogleMaps https://vikwp.com -->	";	?>
 	$def_center_lng = $instance['center_lng'];
 	//
 	if ($apikeygm != "") { ?>
-		<script src="https://maps.google.com/maps/api/js?key=<?php echo $apikeygm;?>"></script>
+		<script src="https://maps.google.com/maps/api/js?key=<?php echo esc_attr(rawurlencode($apikeygm)); ?>"></script>
 	<?php } else { ?>
 		<script src="https://maps.google.com/maps/api/js"></script>
 	<?php }
-	if(@count($arrmap) > 0) {
+	if(count($arrmap) > 0) {
 		?>
 		<script language="JavaScript" type="text/javascript">
 		jQuery.noConflict();
@@ -127,16 +126,16 @@ echo "<!-- Init VikGoogleMaps https://vikwp.com -->	";	?>
 			var marker<?php echo $k; ?> = new google.maps.Marker({
 				position: new google.maps.LatLng(<?php echo esc_js( $v['latitude'] ); ?>, <?php echo esc_js( $v['longitude'] ); ?>),
 				map: map,
-				title: '<?php echo addslashes($v['title']); ?>'
+				title: <?php echo vikwl_js_value(wp_strip_all_tags($v['title'])); ?>
 				<?php
 				if(!empty($v['shape'])) {
 					?>
-				,icon: '<?php echo $v['shape']; ?>'	
+				,icon: <?php echo vikwl_js_value($v['shape']); ?>	
 					<?php
 				}
 				if(!empty($v['shadow'])) {
 					?>
-				,shadow: {url: '<?php echo $v['shadow'];?>', anchor: new google.maps.Point(<?php echo $shadowpointleft; ?>, <?php echo $shadowpointright; ?>)}	
+				,shadow: {url: <?php echo vikwl_js_value($v['shadow']); ?>, anchor: new google.maps.Point(<?php echo $shadowpointleft; ?>, <?php echo $shadowpointright; ?>)}	
 					<?php
 				}
 				?>
@@ -144,7 +143,7 @@ echo "<!-- Init VikGoogleMaps https://vikwp.com -->	";	?>
 			<?php
 			if(!empty($v['text'])) {
 			?>
-				var tooltip<?php echo $k; ?> = '<div class="vikgmapinfow"><h3><?php echo addslashes($v['title']); ?></h3><?php echo addslashes(preg_replace('/\s\s+/', ' ', $v['text'])); ?></div>';
+				var tooltip<?php echo $k; ?> = <?php echo vikwl_js_value('<div class="vikgmapinfow"><h3>' . wp_kses_post($v['title']) . '</h3>' . wp_kses_post(preg_replace('/\s\s+/', ' ', $v['text'])) . '</div>'); ?>;
 				var infowindow<?php echo $k; ?> = new google.maps.InfoWindow({
 					content: tooltip<?php echo $k; ?>
 				});
@@ -176,7 +175,7 @@ echo "<!-- Init VikGoogleMaps https://vikwp.com -->	";	?>
 	?>
 
 <?php ?>
-<div class="vikgooglemapscontainer <?php echo isset($instance['contact_position']) ? $instance['contact_position'] : '' ; ?>">
+<div class="vikgooglemapscontainer <?php echo isset($instance['contact_position']) ? esc_attr(vikwl_allowed_value($instance['contact_position'], array('vikcnt_above', 'vikcnt_hover', 'vikcnt_left', 'vikcnt_right'), '')) : '' ; ?>">
 	<?php if($get_cnt_enabled == 1) { echo $cnt; } ?>
 	<div class="vikgooglemaps_content">	
 		<div id="vikgooglemaps_<?php echo $vikgooglemapsid; ?>" <?php echo $stylesize; ?>></div>

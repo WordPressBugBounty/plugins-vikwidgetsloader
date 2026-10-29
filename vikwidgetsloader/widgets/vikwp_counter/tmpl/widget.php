@@ -14,8 +14,8 @@ global $post;
 
 $arrslide = array();
 
-$get_number_items	= array_key_exists('counter_displayed', $instance) ? $instance['counter_displayed'] : 0;
-$get_item_padding = (isset($instance['counter_padding']) && !empty($instance['counter_padding']) ? $instance['counter_padding'] : 2 );
+$get_number_items	= array_key_exists('counter_displayed', $instance) ? (int) $instance['counter_displayed'] : 0;
+$get_item_padding = (isset($instance['counter_padding']) && !empty($instance['counter_padding']) ? (int) $instance['counter_padding'] : 2 );
 
 
 $get_class_suffix = isset( $instance['class_suffix'] ) ? $instance['class_suffix'] : '';
@@ -30,20 +30,22 @@ if ($get_number_items > 0) {
 
 		$get_item_value = (isset($instance['counter_' . $i . '_value']) && !empty($instance['counter_' . $i . '_value']) ? $instance['counter_' . $i . '_value'] : '' );
 
+		$get_item_type = vikwl_allowed_value(isset($instance['counter_' . $i . '_type']) ? $instance['counter_' . $i . '_type'] : '', array('fa', 'far', 'fas', 'fab'), 'fas');
+
 		$slider_entry = '<div class="vikcounter-item col-xs-6 col-sm-'.$get_item_padding.'">';
 			$slider_entry .= '<div class="vikcounter-item-inner">';
 				if (!empty($instance['counter_'.$i.'_image'])) {
-					$slider_entry .= '<img class="vikcounter-img" src="'.$instance['counter_'.$i.'_image'].'" />';
+					$slider_entry .= '<img class="vikcounter-img" src="'.esc_url($instance['counter_'.$i.'_image']).'" />';
 				}
 				if (!empty($instance['counter_'.$i.'_selected'])) {
-					$slider_entry .= '<span class="vikcounter-icon"><i class="'.$instance['counter_'.$i.'_type'].' fa-'.$instance['counter_'.$i.'_selected'].'" ></i></span>';
+					$slider_entry .= '<span class="vikcounter-icon"><i class="'.esc_attr($get_item_type.' fa-'.vikwl_css_classes($instance['counter_'.$i.'_selected'])).'" ></i></span>';
 				}
-				$slider_entry .= '<span id="vikcounter-count-'.$rand_id.'-'.$i.'" class="vikcounter-count">'.$get_item_value.'</span>';
+				$slider_entry .= '<span id="vikcounter-count-'.$rand_id.'-'.$i.'" class="vikcounter-count">'.esc_html($get_item_value).'</span>';
 				if (!empty($instance['counter_' . $i . '_title'])) {
-					$slider_entry .= '<h3 class="vikcounter-title">'.$instance['counter_' . $i . '_title'].'</h3>';
+					$slider_entry .= '<h3 class="vikcounter-title">'.wp_kses_post($instance['counter_' . $i . '_title']).'</h3>';
 				}
 				if (!empty($instance['counter_' . $i . '_description'])) {
-					$slider_entry .= '<div class="vikcounter-caption">'.$instance['counter_' . $i . '_description'].'</div>';
+					$slider_entry .= '<div class="vikcounter-caption">'.wp_kses_post($instance['counter_' . $i . '_description']).'</div>';
 				}
 			$slider_entry .= '</div>';
 		$slider_entry .= '</div>';

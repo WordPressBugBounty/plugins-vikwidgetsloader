@@ -12,52 +12,56 @@ defined('ABSPATH') or die('No script kiddies please!');
 
 $arrslide = array();
 
-$number_of_speakers = array_key_exists('number_of_speakers', $instance) ? $instance['number_of_speakers'] : '';
-$get_numb = (array_key_exists('number_of_rows', $instance) && !empty($instance['number_of_rows'])) ? $instance['number_of_rows'] : 1;
+$number_of_speakers = array_key_exists('number_of_speakers', $instance) ? (int) $instance['number_of_speakers'] : 0;
+$get_numb = (array_key_exists('number_of_rows', $instance) && !empty($instance['number_of_rows'])) ? (int) $instance['number_of_rows'] : 1;
 $get_textarea_above = array_key_exists('textarea_above', $instance) ? $instance['textarea_above'] : '';
 
 $items_per_row = $get_numb > 0 ? ceil($number_of_speakers / $get_numb) : $number_of_speakers;
 $itemwidth = $items_per_row > 0 ? (100 / $items_per_row) : 0;
 
-$first_height = 0;
+// every value is escaped for the context it's printed in (attributes, URLs, HTML)
+$speaker_value = function($i, $key) use ($instance) {
+	$field = 'spkr_' . $i . '_' . $key;
+	return array_key_exists($field, $instance) && is_scalar($instance[$field]) ? (string) $instance[$field] : '';
+};
+
+$speaker_socials = array(
+	'facebook' => array('class' => '',                         'icon' => 'fa fa-facebook',    'target' => ''),
+	'twitter'  => array('class' => ' viksp-socials-twitter',  'icon' => 'fa fa-twitter',     'target' => ' target="_blank"'),
+	'google'   => array('class' => ' viksp-socials-google',   'icon' => 'fa fa-google-plus', 'target' => ' target="_blank"'),
+	'linkedin' => array('class' => ' viksp-socials-linkedin', 'icon' => 'fa fa-linkedin',    'target' => ' target="_blank"'),
+);
 
 if ($number_of_speakers > 0) {
 	for ($i = 1; $i <= $number_of_speakers; $i++) { 
-		$imgabpath = array_key_exists('spkr_' . $i . '_image', $instance) ? $instance['spkr_' . $i . '_image'] : "";
-		$img_size = !empty($imgabpath) ? @getimagesize($imgabpath) : false;
-		$first_height = $img_size && !($first_height > 0) ? $img_size[1] : $first_height;
+		$nominative = $speaker_value($i, 'nominative');
+		$readmore   = $speaker_value($i, 'readmore');
 		$slider_entry = '<div id="viksp-inner" class="viksp-inner">';
 		$slider_entry .= '<div class="viksp-divimg">';
-			$slider_entry .= '<img class="viksp-img" src="'.$instance['spkr_' . $i . '_image'].'" alt="'.$instance['spkr_' . $i . '_nominative'].'"/>
+			$slider_entry .= '<img class="viksp-img" src="'.esc_url($speaker_value($i, 'image')).'" alt="'.esc_attr(wp_strip_all_tags($nominative)).'"/>
 							<span class="viksp-imgmasktwo"></span>';
-							if(array_key_exists('spkr_' . $i . '_readmore', $instance) && !empty($instance['spkr_' . $i . '_readmore'])) { 
-								$slider_entry .= '<a class="viksp-imgmask" href="'.$instance['spkr_' . $i . '_readmore'].'"></a>';
+							if (!empty($readmore)) { 
+								$slider_entry .= '<a class="viksp-imgmask" href="'.esc_url($readmore).'"></a>';
 							} else {
 								$slider_entry .= '<span class="viksp-imgmask"></span>';
 							}
 		$slider_entry .= '</div>';
 		$slider_entry .= '<figcaption>';
-		if(array_key_exists('spkr_' . $i . '_nominative', $instance) && !empty($instance['spkr_' . $i . '_nominative'])) {
-			$slider_entry .= '	<div class="viksp-name"><span>'.$instance['spkr_' . $i . '_nominative'].'</span></div>';
+		if (!empty($nominative)) {
+			$slider_entry .= '	<div class="viksp-name"><span>'.wp_kses_post($nominative).'</span></div>';
 		}
-		if(array_key_exists('spkr_' . $i . '_role', $instance) && !empty($instance['spkr_' . $i . '_role'])) {
-			$slider_entry .= '	<div class="viksp-job"><span>'.$instance['spkr_' . $i . '_role'].'</span></div>';
+		if ($role = $speaker_value($i, 'role')) {
+			$slider_entry .= '	<div class="viksp-job"><span>'.wp_kses_post($role).'</span></div>';
 		}
-		if(array_key_exists('spkr_' . $i . '_description', $instance) && !empty($instance['spkr_' . $i . '_description'])) {
-			$slider_entry .= '	<div class="viksp-descr"><span>'.$instance['spkr_' . $i . '_description'].'</span></div>';
+		if ($description = $speaker_value($i, 'description')) {
+			$slider_entry .= '	<div class="viksp-descr"><span>'.wp_kses_post($description).'</span></div>';
 		}
 		$slider_entry .= ' <div class="viksp-socials">';
-			if(array_key_exists('spkr_' . $i . '_facebook', $instance) && !empty($instance['spkr_' . $i . '_facebook'])) {
-				$slider_entry .= '	<span class="viksp-socials-link"><a href="'.$instance['spkr_' . $i . '_facebook'].'"><i class="fa fa-facebook"></i></a></span>';
-			}
-			if(array_key_exists('spkr_' . $i . '_twitter', $instance) && !empty($instance['spkr_' . $i . '_twitter'])) {
-				$slider_entry .= '	<span class="viksp-socials-link viksp-socials-twitter"><a href="'.$instance['spkr_' . $i . '_twitter'].'" target="_blank"><i class="fa fa-twitter"></i></a></span>';
-			}
-			if(array_key_exists('spkr_' . $i . '_google', $instance) && !empty($instance['spkr_' . $i . '_google'])) {
-				$slider_entry .= '	<span class="viksp-socials-link viksp-socials-google"><a href="'.$instance['spkr_' . $i . '_google'].'" target="_blank"><i class="fa fa-google-plus"></i></a></span>';
-			}
-			if(array_key_exists('spkr_' . $i . '_linkedin', $instance) && !empty($instance['spkr_' . $i . '_linkedin'])) {
-				$slider_entry .= '	<span class="viksp-socials-link viksp-socials-linkedin"><a href="'.$instance['spkr_' . $i . '_linkedin'].'" target="_blank"><i class="fa fa-linkedin"></i></a></span>';
+			foreach ($speaker_socials as $social => $social_data) {
+				$social_url = $speaker_value($i, $social);
+				if (!empty($social_url)) {
+					$slider_entry .= '	<span class="viksp-socials-link'.$social_data['class'].'"><a href="'.esc_url($social_url).'"'.$social_data['target'].'><i class="'.$social_data['icon'].'"></i></a></span>';
+				}
 			}
 		$slider_entry .= ' </div>';
 			
@@ -70,12 +74,12 @@ if ($number_of_speakers > 0) {
 ?>
 <div id="viksp_container" class="viksp_container">
 	<?php if(!empty($get_textarea_above)) { ?>
-	<div class="viksp_text"><?php echo $get_textarea_above; ?></div>
+	<div class="viksp_text"><?php echo wp_kses_post($get_textarea_above); ?></div>
 	<?php } ?>
     <?php
     if (is_array($arrslide)) {
 		foreach($arrslide as $vsl) {
-			echo "<figure class=\"viksp-speaker\" style=\"width:".$itemwidth."%;\">";
+			echo "<figure class=\"viksp-speaker\" style=\"width:".(float) $itemwidth."%;\">";
 			echo $vsl;
 			echo "</figure>";
 		}

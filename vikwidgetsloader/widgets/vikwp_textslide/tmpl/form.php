@@ -372,7 +372,7 @@ if (isset( $instance['class_suffix'] )) {
 							<label for="<?php echo $this->get_field_id('ts_category_id'); ?>"><?php _e('Select Category:', 'vikwidgetsloader'); ?></label>
 							<select id="<?php echo $this->get_field_id('ts_category_id'); ?>" name="<?php echo $this->get_field_name('ts_category_id'); ?>" class="widefat" style="width:100%;">
 								<?php foreach(get_terms('category','parent=0&hide_empty=0') as $term) { ?>
-									<option <?php selected( $ts_category_id, $term->term_id ); ?> value="<?php echo $term->term_id; ?>"><?php echo $term->name; ?></option>
+									<option <?php selected( $ts_category_id, $term->term_id ); ?> value="<?php echo (int) $term->term_id; ?>"><?php echo esc_html( $term->name ); ?></option>
 								<?php } ?>
 							</select>
 						</p>

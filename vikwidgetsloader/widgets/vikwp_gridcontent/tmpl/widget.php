@@ -15,12 +15,11 @@ global $post;
 $title = apply_filters( 'widget_title', $instance['title'] );
 $cat_id 	 = $instance['gridcont_category_id'];
 $posts_limit = $instance['gridcont_numb_limit'];
-$get_bg_img = $instance['bg_image'];
-$gridcont_ordering = (isset($instance['gridcont_ordering']) && !empty($instance['gridcont_ordering']) ? $instance['gridcont_ordering'] : '' );
+$gridcont_ordering = vikwl_allowed_value(isset($instance['gridcont_ordering']) ? strtoupper((string) $instance['gridcont_ordering']) : '', array('ASC', 'DESC'), 'DESC');
 
-$get_bg_img  = (isset($instance['bg_image']) && !empty($instance['bg_image']) ? $instance['bg_image'] : '' );
-$get_bg_color = (isset($instance['bg_color']) && !empty($instance['bg_color']) ? $instance['bg_color'] : '' );
-$get_numb_per_row = (isset($instance['gridcont_number_of_rows']) && !empty($instance['gridcont_number_of_rows']) ? $instance['gridcont_number_of_rows'] : 1 );
+$get_bg_img  = (isset($instance['bg_image']) && !empty($instance['bg_image']) ? vikwl_css_url($instance['bg_image']) : '' );
+$get_bg_color = (isset($instance['bg_color']) && !empty($instance['bg_color']) ? vikwl_css_color($instance['bg_color']) : '' );
+$get_numb_per_row = (isset($instance['gridcont_number_of_rows']) && (int) $instance['gridcont_number_of_rows'] > 0 ? (int) $instance['gridcont_number_of_rows'] : 1 );
 $get_btn_allposts = (isset($instance['gridcont_show_allposts']) && !empty($instance['gridcont_show_allposts']) ? $instance['gridcont_show_allposts'] : 0 );
 $get_text_allposts = (isset($instance['gridcont_text_allposts']) && !empty($instance['gridcont_text_allposts']) ? $instance['gridcont_text_allposts'] : __( 'Discover all our services', 'vikwidgetsloader' ));
 $get_readmore_text = (isset($instance['gridcont_readmore_text']) && !empty($instance['gridcont_readmore_text']) ? $instance['gridcont_readmore_text'] : __( 'Read More', 'vikwidgetsloader' ));
@@ -44,7 +43,7 @@ $pdet = array(
 $myposts = get_posts( $pdet );
 ?>
 <div class="container-fluid custom-fluid vikwp_gc_container-box <?php echo ( $get_numb_per_row > 1 ) ? 'vikwp_gc-cnt-multiple' : 'vikwp_gc-cnt-oneitem'; ?>">
-	<div class="vikwp_gc_bg<?php echo ( !empty( $get_bg_img ) ) ? ' vikwp_gc_bgimg' : ''; ?>" style="background-color: <?php echo ( !empty( $get_bg_color ) ) ? $get_bg_color : 'transparent'; ?>; <?php echo ( !empty( $get_bg_img ) ) ? 'background-image: url('.$get_bg_img.')' : ''; ?>">
+	<div class="vikwp_gc_bg<?php echo ( !empty( $get_bg_img ) ) ? ' vikwp_gc_bgimg' : ''; ?>" style="background-color: <?php echo ( !empty( $get_bg_color ) ) ? esc_attr( $get_bg_color ) : 'transparent'; ?>; <?php echo ( !empty( $get_bg_img ) ) ? 'background-image: url(\''.esc_attr( $get_bg_img ).'\')' : ''; ?>">
 		<div class="vikwp_gc_cnt-mask"></div>
 			<div class="vikwp_gc_cnt-inner ">
 			<?php 
@@ -53,18 +52,18 @@ $myposts = get_posts( $pdet );
 					<div class="vikwp_gc-row-item-inner">
 						<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 vikwp_gc-text">
 							<div class="vikwp_gc-inner">
-								<h3 class="vikwp_gc-title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
+								<h3 class="vikwp_gc-title"><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
 								<?php if( $get_gridcont_excerpt == 1 ) { ?>
 								<div class="vikwp_gc-content"><?php the_excerpt(); ?></div>
 								<?php } ?>
 								<?php if( $instance['gridcont_readmore'] == 1) { ?>
-									<a href="<?php the_permalink(); ?>" class="btn" title="<?php the_title(); ?>"><?php echo $get_readmore_text; ?></a>
+									<a href="<?php the_permalink(); ?>" class="btn" title="<?php the_title_attribute(); ?>"><?php echo wp_kses_post( $get_readmore_text ); ?></a>
 								<?php } ?>
 							</div>
 						</div>
 						<?php if( has_post_thumbnail() ) { ?>
 						<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 vikwp_gc-image">
-							<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_post_thumbnail(); ?></a>
+							<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail(); ?></a>
 						</div>
 						<?php } ?>
 					</div>		
@@ -77,7 +76,7 @@ $myposts = get_posts( $pdet );
 
 		<?php if ( !empty($get_btn_allposts) ) { ?>
 			<div class="vikwp_gc_allposts">
-				<a href="category/<?php echo $get_cat_slug->slug; ?>" alt="<?php echo $get_cat_name; ?>" class="btn"><?php echo $get_text_allposts; ?></a>
+				<a href="category/<?php echo $get_cat_slug ? esc_attr( $get_cat_slug->slug ) : ''; ?>" alt="<?php echo esc_attr( $get_cat_name ); ?>" class="btn"><?php echo wp_kses_post( $get_text_allposts ); ?></a>
 			</div>
 		<?php } ?>
 	</div>

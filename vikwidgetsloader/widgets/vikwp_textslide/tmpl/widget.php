@@ -14,26 +14,26 @@ $title 				= apply_filters( 'widget_title', $instance['title'] );
 $get_class_suffix 	= isset( $instance['class_suffix'] ) ? $instance['class_suffix'] : '';
 $get_class_suffix 	= implode( ' ', array_map( 'sanitize_html_class', explode( ' ', $get_class_suffix ) ) );
 
-$get_title_effect 	= $instance['title_effect'];
-$get_desc_effect 	= $instance['desc_effect'];
+$get_title_effect 	= vikwl_css_classes(isset($instance['title_effect']) ? $instance['title_effect'] : '');
+$get_desc_effect 	= vikwl_css_classes(isset($instance['desc_effect']) ? $instance['desc_effect'] : '');
 $get_sentence_layout = $instance['testimonials_layout'];
 //$enable_testimonials = (isset($instance['testimonials']));
 $enable_testimonials = array_key_exists('testimonials', $instance) ? $instance['testimonials'] : '';
 $get_enable_testimonials = isset($enable_testimonials) && intval($enable_testimonials) == 1 ? "true" : "false";
 
 //$get_sentence_layout = (isset($instance['testimonials_layout']));
-$get_opacity_mask = (isset($instance['opacity_mask']) && !empty($instance['opacity_mask']) ? $instance['opacity_mask'] : '' );
-$get_image_type	= (isset($instance['image_type']) && !empty($instance['image_type']) ? $instance['image_type'] : 'scroll' );
+$get_opacity_mask = (isset($instance['opacity_mask']) && !empty($instance['opacity_mask']) ? min(1, max(0, (float) $instance['opacity_mask'])) : '' );
+$get_image_type	= vikwl_allowed_value(isset($instance['image_type']) ? $instance['image_type'] : '', array('scroll', 'fixed'), 'scroll');
 $get_textarea = (isset($instance['textarea']) && !empty($instance['textarea']) ? $instance['textarea'] : '' );
 
-$get_img_bg			= (isset($instance['image']) && !empty($instance['image']) ? $instance['image'] : '');
+$get_img_bg			= (isset($instance['image']) && !empty($instance['image']) ? vikwl_css_url($instance['image']) : '');
 $get_testimonial_post_title = $instance['testimonial_post_title'];
 
 // Fade
-$get_width 			= $instance['testimonial_box_width'];
-$get_height  = array_key_exists('testimonial_box_height', $instance) ? $instance['testimonial_box_height'] : '';
-$get_color_title = (isset($instance['testimonial_title_color']) && !empty($instance['testimonial_title_color']) ? $instance['testimonial_title_color'] : '' );
-$get_color_desc = (isset($instance['testimonial_title_color']) && !empty($instance['testimonial_title_color']) ? $instance['testimonial_title_color'] : '' );
+$get_width 			= vikwl_css_size(isset($instance['testimonial_box_width']) ? $instance['testimonial_box_width'] : '', '');
+$get_height  = array_key_exists('testimonial_box_height', $instance) && is_numeric($instance['testimonial_box_height']) ? (float) $instance['testimonial_box_height'] : '';
+$get_color_title = (isset($instance['testimonial_title_color']) && !empty($instance['testimonial_title_color']) ? vikwl_css_color($instance['testimonial_title_color']) : '' );
+$get_color_desc = (isset($instance['testimonial_title_color']) && !empty($instance['testimonial_title_color']) ? vikwl_css_color($instance['testimonial_title_color']) : '' );
 
 $get_quotes 		= $instance['quotes'];
 $get_delay 			= isset( $instance['testimonial_time_delay'] ) ? (float) $instance['testimonial_time_delay'] : 0;
@@ -41,8 +41,8 @@ $get_fadein 		= isset( $instance['testimonial_time_fadein'] ) ? (float) $instanc
 $get_fadeout 		= isset( $instance['testimonial_time_fadeout'] ) ? (float) $instance['testimonial_time_fadeout'] : 0;
 
 // Carousel
-$get_img_position 	= $instance['testimonials_img_pos'];
-$numb_xrow 			= (isset($instance['testimonials_xrow']) && !empty($instance['testimonials_xrow']) ? $instance['testimonials_xrow'] : '' );
+$get_img_position 	= vikwl_allowed_value(isset($instance['testimonials_img_pos']) ? $instance['testimonials_img_pos'] : '', array('up', 'down', 'right', 'left'), 'up');
+$numb_xrow 			= (isset($instance['testimonials_xrow']) && (int) $instance['testimonials_xrow'] > 0 ? (int) $instance['testimonials_xrow'] : 1 );
 
 $autoplayparam = (isset($instance['testimonials_autoplay']) && !empty($instance['testimonials_autoplay']) ? $instance['testimonials_autoplay'] : '0' );
 $autoplayparam_values = intval($autoplayparam) == 1 ? "true" : "false";
@@ -63,9 +63,9 @@ $rand_numb = rand(0, 15);
 ?>
 <div id="vikwp_ts-<?php echo $rand_numb; ?>" class="vikwp_ts-container">
 
-	<div class="vikwp_ts-inner vikwp_ts-image-<?php echo $get_image_type; ?> <?php echo ( empty( $get_img_bg ) ) ? 'vikqt_nobg' : 'vikqt_bg'; ?>" style="background-image:url(<?php echo $get_img_bg; ?>);">
+	<div class="vikwp_ts-inner vikwp_ts-image-<?php echo esc_attr($get_image_type); ?> <?php echo ( empty( $get_img_bg ) ) ? 'vikqt_nobg' : 'vikqt_bg'; ?>" style="background-image:url('<?php echo esc_attr($get_img_bg); ?>');">
 		<?php if($instance['enable_mask'] == 1) { ?>
-			<div class="vikwp_ts-mask" style="opacity: <?php echo $get_opacity_mask?>;"></div>
+			<div class="vikwp_ts-mask" style="opacity: <?php echo esc_attr($get_opacity_mask); ?>;"></div>
 		<?php } ?>
 			<?php if(isset($instance['testimonials']) && $instance['testimonials'] == 1) { 
 				if($get_sentence_layout == 0) { ?>
@@ -73,27 +73,27 @@ $rand_numb = rand(0, 15);
 						<?php
 						if(!empty($get_textarea)) { ?>
 							<div class="vikqt_box_desc">
-								<?php echo $get_textarea; ?>
+								<?php echo wp_kses_post($get_textarea); ?>
 							</div>
 						<?php } ?>
-						<div class="vikqt-slide" style="width:<?php echo $get_width; ?>; height: <?php echo $get_height; ?>px;">
+						<div class="vikqt-slide" style="width:<?php echo esc_attr($get_width); ?>; height: <?php echo esc_attr($get_height); ?>px;">
 						<?php 
 						foreach ( $myposts as $post ) : setup_postdata( $post ); 
 							$descTestimonial = get_the_content();
 							$titleTestimonial = get_the_title();
 							$imgTestimonial = get_the_post_thumbnail_url(get_the_ID(),'medium-square');
 							?>
-							<div class="vikqt_box vikqt-item-fade vikqt-item-lay_<?php echo $get_img_position; ?>">
+							<div class="vikqt_box vikqt-item-fade vikqt-item-lay_<?php echo esc_attr($get_img_position); ?>">
 								<?php 
 								if($get_img_position == "up" || $get_img_position == "down") {
 									if( $get_testimonial_post_title == 1 ) { ?>
-										<div class="vikqt_title" style="<?php echo ( !empty( $get_color_title ) ) ? 'color:'.$get_color_title.';' : ''; ?>"><?php echo $titleTestimonial ?></div>
+										<div class="vikqt_title" style="<?php echo ( !empty( $get_color_title ) ) ? 'color:'.esc_attr($get_color_title).';' : ''; ?>"><?php echo $titleTestimonial; ?></div>
 									<?php 
 									}
 								} ?>
-										<div class="vikqt-item-content vikqt-item-img_<?php echo $get_img_position; ?>">
+										<div class="vikqt-item-content vikqt-item-img_<?php echo esc_attr($get_img_position); ?>">
 											<?php if(!empty($imgTestimonial)) { ?>
-												<div class="vikqt_image"><img src="<?php echo $imgTestimonial; ?>" alt="<?php echo $titleTestimonial; ?>" /></div>
+												<div class="vikqt_image"><img src="<?php echo esc_url($imgTestimonial); ?>" alt="<?php echo esc_attr(wp_strip_all_tags($titleTestimonial)); ?>" /></div>
 											<?php } ?>
 												<div class="vikqt_text_cont">
 													<?php if($get_quotes == 1) { ?>
@@ -102,11 +102,11 @@ $rand_numb = rand(0, 15);
 														</div>
 													<?php } ?>
 													<?php if(!empty($descTestimonial)) { ?>
-														<div class="vikqt_desc" style="color: <?php echo $get_color_desc; ?>;">
+														<div class="vikqt_desc" style="color: <?php echo esc_attr($get_color_desc); ?>;">
 															<?php echo $descTestimonial ?>
 															<?php if($get_img_position == "right" || $get_img_position == "left") {
 																	if(!empty($titleTestimonial)) { ?>
-																	<div class="vikqt_title" style="<?php echo ( !empty( $get_color_title ) ) ? 'color:'.$get_color_title.';' : ''; ?>"><?php echo $titleTestimonial; ?></div>
+																	<div class="vikqt_title" style="<?php echo ( !empty( $get_color_title ) ) ? 'color:'.esc_attr($get_color_title).';' : ''; ?>"><?php echo $titleTestimonial; ?></div>
 															<?php }
 															} ?>
 														</div>
@@ -118,11 +118,11 @@ $rand_numb = rand(0, 15);
 						</div>
 					</div>
 				<?php } else { ?>
-					<div class="vikqt-container vikqt-grid-l container" style="width:<?php echo $get_width; ?>;">
+					<div class="vikqt-container vikqt-grid-l container" style="width:<?php echo esc_attr($get_width); ?>;">
 						<?php
 						if(!empty($get_textarea)) { ?>
 							<div class="vikqt_box_desc">
-								<?php echo $get_textarea; ?>
+								<?php echo wp_kses_post($get_textarea); ?>
 							</div>
 						<?php } ?>
 						<div id="vikqt-inner" class="owl-carousel vikqt-items row-fluid">	
@@ -132,10 +132,10 @@ $rand_numb = rand(0, 15);
 							$imgTestimonial = get_the_post_thumbnail_url(get_the_ID(),'medium-square');
 							
 						 	?>
-							<div class="vikqt_box vikqt-item-grid vikqt-item-lay_<?php echo $get_img_position; ?>">
-								<div class="vikqt-item-content vikqt-item-img_<?php echo $get_img_position; ?>">
+							<div class="vikqt_box vikqt-item-grid vikqt-item-lay_<?php echo esc_attr($get_img_position); ?>">
+								<div class="vikqt-item-content vikqt-item-img_<?php echo esc_attr($get_img_position); ?>">
 									<?php if(!empty($imgTestimonial)) { ?>
-										<div class="vikqt_image"><img src="<?php echo $imgTestimonial; ?>" alt="<?php echo $titleTestimonial; ?>" /></div>
+										<div class="vikqt_image"><img src="<?php echo esc_url($imgTestimonial); ?>" alt="<?php echo esc_attr(wp_strip_all_tags($titleTestimonial)); ?>" /></div>
 									<?php } ?>
 										<div class="vikqt_text_cont">
 										<?php if($get_quotes == 1) { ?>
@@ -147,7 +147,7 @@ $rand_numb = rand(0, 15);
 												echo $descTestimonial; 
 												if($get_img_position == "right" || $get_img_position == "left") {
 													if(!empty($titleTestimonial)) { ?>
-													<div class="vikqt_title" style="<?php echo ( !empty( $get_color_title ) ) ? 'color:'.$get_color_title.';' : ''; ?>"><?php echo $titleTestimonial; ?></div>
+													<div class="vikqt_title" style="<?php echo ( !empty( $get_color_title ) ) ? 'color:'.esc_attr($get_color_title).';' : ''; ?>"><?php echo $titleTestimonial; ?></div>
 												<?php }
 												} 
 
@@ -158,7 +158,7 @@ $rand_numb = rand(0, 15);
 									</div>
 								<?php if($get_img_position == "up" || $get_img_position == "down") {
 									if( $get_testimonial_post_title == 1 ) { ?>
-									<div class="vikqt_title" style="<?php echo ( !empty( $get_color_title ) ) ? 'color:'.$get_color_title.';' : ''; ?>"> <?php echo $titleTestimonial; ?></div>
+									<div class="vikqt_title" style="<?php echo ( !empty( $get_color_title ) ) ? 'color:'.esc_attr($get_color_title).';' : ''; ?>"> <?php echo $titleTestimonial; ?></div>
 								<?php }
 								} ?>
 							</div>
@@ -171,13 +171,13 @@ $rand_numb = rand(0, 15);
 			} else { ?>
 			<div class="vikwp_ts-layone">
 				<?php if(!empty($instance['title_image'])) { ?>
-					<h3 class="vikwp_ts-title animated <?php echo $get_title_effect; ?>" style="<?php echo ( !empty( $get_color_title ) ) ? 'color:'.$get_color_desc.';' : ''; ?>"><?php echo $instance['title_image']; ?></h3>
+					<h3 class="vikwp_ts-title animated <?php echo esc_attr($get_title_effect); ?>" style="<?php echo ( !empty( $get_color_title ) ) ? 'color:'.esc_attr($get_color_desc).';' : ''; ?>"><?php echo wp_kses_post($instance['title_image']); ?></h3>
 				<?php } ?>
 		
 				<?php if(!empty($instance['textarea'])) { ?>
-				<div class="vikwp_ts-desc animated <?php echo $get_desc_effect; ?>">
+				<div class="vikwp_ts-desc animated <?php echo esc_attr($get_desc_effect); ?>">
 					<div class="vikwp_ts-desc-inner" style="<?php echo ( !empty( $get_color_desc ) ) ? 'color:'.$get_color_desc.';' : ''; ?>">
-						<?php echo $instance['textarea']; ?>
+						<?php echo wp_kses_post($instance['textarea']); ?>
 					</div>
 				</div>
 				<?php } ?>
@@ -215,7 +215,7 @@ $rand_numb = rand(0, 15);
 		<script type="text/javascript">
 		jQuery(document).ready(function(){ 
 			jQuery("#vikqt-inner").owlCarousel({
-				items : <?php echo $numb_xrow; ?>,
+				items : <?php echo (int) $numb_xrow; ?>,
 				autoplay : <?php echo $autoplayparam_values; ?>,
 				nav : <?php echo $navigation_values; ?>,
 				dots : <?php echo $pagination_values; ?>,
@@ -251,7 +251,7 @@ $rand_numb = rand(0, 15);
 					},
 				<?php } ?>
 				1024: {
-					items: <?php echo $numb_xrow; ?>,
+					items: <?php echo (int) $numb_xrow; ?>,
 					nav: true
 				}
 			}

@@ -37,14 +37,17 @@ switch ($getfont) {
 	break;
 }
 
-$get_align = $instance['textalign'];
+$get_align = vikwl_allowed_value(isset($instance['textalign']) ? $instance['textalign'] : '', array('center', 'left', 'right'), 'center');
 $dotsnav = $instance['dotsnav'];
 
 $viksliderid = rand(1, 17);
 $autoplay = $instance['autoplay'];
 $interval = $instance['interval'];
 $navigation = $instance['navigation'];
-$readmtext = $instance['readmoretext'];
+$readmtext = isset($instance['readmoretext']) ? wp_kses_post($instance['readmoretext']) : '';
+$title_effect = vikwl_css_classes(isset($instance['title_effect']) ? $instance['title_effect'] : '');
+$desc_effect = vikwl_css_classes(isset($instance['desc_effect']) ? $instance['desc_effect'] : '');
+$readmore_effect = vikwl_css_classes(isset($instance['readmore_effect']) ? $instance['readmore_effect'] : '');
 
 if($getfont > 0) {
 	$css_style = "";
@@ -62,7 +65,7 @@ if(empty($height)) {
 	$height = 0;
 }
 
-$number_of_slides = $instance['number_of_slides'];
+$number_of_slides = isset($instance['number_of_slides']) ? (int) $instance['number_of_slides'] : 0;
 
 //$slidejstr = $instance['viksliderimages'] '[]');
 //$slides = json_decode($slidejstr);
@@ -73,7 +76,7 @@ if ($number_of_slides) {
 		}
 		$imgabpath = $instance['slideimage_' . $i];
 		$slider_entry = '<div class="item'.($first_read ? ' active' : '').'">';
-			$slider_entry .= '<img class="slide-image vikcs-img-bckground-'.$number.'" src="'.$imgabpath.'" alt="'.$instance['slidetitle_' . $i].'"/>';
+			$slider_entry .= '<img class="slide-image vikcs-img-bckground-'.$number.'" src="'.esc_url($imgabpath).'" alt="'.esc_attr(wp_strip_all_tags($instance['slidetitle_' . $i])).'"/>';
 			$slider_entry .= '<div class="bs-slider-overlay"></div>';
 				
 			$slider_entry .= '<div class="container">'; //Start - Container
@@ -81,15 +84,15 @@ if ($number_of_slides) {
 					$slider_entry .= '<div class="slide-text slide_style_'.$get_align.'">'; //Start - slide-text
 					
 						if(!empty($instance['slidetitle_' . $i])) {
-							$slider_entry .= '	<h2 data-animation="animated '.$instance['title_effect'].'">'.$instance['slidetitle_' . $i].'</h2>';
+							$slider_entry .= '	<h2 data-animation="animated '.esc_attr($title_effect).'">'.wp_kses_post($instance['slidetitle_' . $i]).'</h2>';
 						}
-						$slider_entry .= '<p data-animation="animated '.$instance['desc_effect'].'">';
+						$slider_entry .= '<p data-animation="animated '.esc_attr($desc_effect).'">';
 							if(!empty($instance['slidecaption_' . $i])) {
-								$slider_entry .= '<span class="vikcs-desc">'.$instance['slidecaption_' . $i].'</span>';
+								$slider_entry .= '<span class="vikcs-desc">'.wp_kses_post($instance['slidecaption_' . $i]).'</span>';
 							}
 						$slider_entry .= '</p>';
 						if(!empty($instance['slidereadmore_' . $i])) {
-							$slider_entry .= '<a href="'.$instance['slidereadmore_' . $i].'" target="_blank" class="btn btn-default" data-animation="animated '.$instance['readmore_effect'].'">'.$readmtext.'</a>';
+							$slider_entry .= '<a href="'.esc_url($instance['slidereadmore_' . $i]).'" target="_blank" class="btn btn-default" data-animation="animated '.esc_attr($readmore_effect).'">'.$readmtext.'</a>';
 						}
 
 					$slider_entry .= '</div>'; //End - slide-text
